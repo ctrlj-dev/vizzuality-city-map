@@ -31,14 +31,14 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
         </CardItem>
 
         <CardItem className="mb-0">
-          <div className="flex justify-center items-center bg-toreabay-50 w-6 h-6 rounded-s">
+          <div className="flex justify-center items-center bg-toreabay-50 w-6 rounded-s">
             <BriefcaseIcon className="w-4 h-4 text-grenadier-400" />
           </div>
           <h4 className="text-sm leading-7 text-zinc-500 whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
             {company.join(', ')}
           </h4>
           <span className="border border-grenadier-400 text-grenadier-400 text-sm rounded-[2px] px-1.5 py-1">
-            123
+            +2
           </span>
         </CardItem>
 

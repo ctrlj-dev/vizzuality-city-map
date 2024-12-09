@@ -59,7 +59,7 @@ const CardAction = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        'absolute h-10 bottom-2 right-0 flex items-center',
+        'absolute h-10 bottom-2 right-2 flex items-center',
         className
       )}
       {...props}

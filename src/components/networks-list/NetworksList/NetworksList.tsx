@@ -1,4 +1,4 @@
-import { NetworksListItem } from '../NetworksListItem';
+import NetworksListItem from './NetworksListItem';
 
 const NetworksList = () => {
   return (
