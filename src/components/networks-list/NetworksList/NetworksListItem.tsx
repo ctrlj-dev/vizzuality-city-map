@@ -18,7 +18,6 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
   return (
     <Card tabIndex={0} className="relative card-animate">
       <Link href={`/networks/${id}`} shallow>
-        {/* Title */}
         <CardTitle>{name}</CardTitle>
 
         <CardItem>
@@ -31,7 +30,7 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
         </CardItem>
 
         <CardItem className="mb-0">
-          <div className="flex justify-center items-center bg-primary-50 w-6 rounded-s">
+          <div className="flex justify-center items-center bg-primary-50 w-6 h-6 rounded-s">
             <BriefcaseIcon className="w-4 h-4 text-secondary-400" />
           </div>
           <h4 className="text-sm leading-7 text-zinc-500 whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
