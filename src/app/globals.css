@@ -19,3 +19,30 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.main-container {
+  @apply grid grid-cols-[551px_auto] w-screen h-screen;
+}
+
+/* aside.css */
+.main-aside {
+  @apply flex flex-col gap-4 h-full p-10;
+}
+
+/* card.css */
+.card-action-animate::before {
+  content: '';
+  @apply absolute inset-0 bg-white rounded-full translate-x-full transition-transform duration-500 ease-out z-0;
+}
+
+.card-animate:hover .card-action-animate::before {
+  @apply translate-x-0;
+}
+
+.card-action-animate-button-bg {
+  @apply opacity-0 translate-x-full transition-all duration-500 ease-out relative;
+}
+
+.card-animate:hover .card-action-animate-button-bg {
+  @apply opacity-100 translate-x-0;
+}

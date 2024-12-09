@@ -44,5 +44,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss/nesting')],
 } satisfies Config;

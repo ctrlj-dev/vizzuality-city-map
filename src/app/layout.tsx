@@ -5,7 +5,7 @@ import './globals.css';
 const poppins = Poppins({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['300', '400', '500', '700', '900'],
+  weight: ['300', '400', '500', '600', '700', '900'],
   variable: '--font-poppins',
 });
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: 'A Worldwide bike networks',
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} font-sans antialiased`}>
-        {children}
+        <main className="main-container">{children}</main>
       </body>
     </html>
   );

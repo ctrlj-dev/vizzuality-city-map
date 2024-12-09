@@ -1,5 +1,5 @@
-import { NetworkView } from '@/components/networks';
+import { NetworksListView } from '@/components/networks-list';
 
 export default function Home() {
-  return <NetworkView />;
+  return <NetworksListView />;
 }
