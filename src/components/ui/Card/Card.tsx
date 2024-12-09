@@ -8,7 +8,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'relative block px-4 py-2 rounded-sm border-b border-toreabay-100 hover:bg-toreabay-100 transition-colors cursor-pointer group',
+      'relative block px-4 py-2 rounded-sm border-b border-primary-100 hover:bg-primary-100 transition-colors cursor-pointer group',
       className
     )}
     {...props}
@@ -23,7 +23,7 @@ const CardTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      'font-bold text-xl leading-7 text-toreabay-800 mb-1',
+      'font-bold text-xl leading-7 text-primary-800 mb-1',
       className
     )}
     {...props}

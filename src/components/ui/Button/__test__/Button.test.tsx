@@ -7,7 +7,7 @@ describe('Button', () => {
     render(<Button>Click me</Button>);
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass('bg-primary');
+    expect(button).toHaveClass('bg-primary-800');
   });
 
   test('renders button with custom className', () => {
@@ -17,21 +17,19 @@ describe('Button', () => {
   });
 
   test('renders button with different variants', () => {
-    const { rerender } = render(
-      <Button variant="destructive">Destructive</Button>
-    );
-    let button = screen.getByRole('button', { name: /destructive/i });
-    expect(button).toHaveClass('bg-destructive');
+    const { rerender } = render(<Button variant="outline">Outline</Button>);
+    let button = screen.getByRole('button', { name: /outline/i });
+    expect(button).toHaveClass('bg-transparent');
 
-    rerender(<Button variant="outline">Outline</Button>);
-    button = screen.getByRole('button', { name: /outline/i });
-    expect(button).toHaveClass('border-input');
+    rerender(<Button variant="secondary">Secondary</Button>);
+    button = screen.getByRole('button', { name: /secondary/i });
+    expect(button).toHaveClass('bg-background');
   });
 
   test('renders button with different sizes', () => {
     const { rerender } = render(<Button size="sm">Small</Button>);
     let button = screen.getByRole('button', { name: /small/i });
-    expect(button).toHaveClass('h-9');
+    expect(button).toHaveClass('h-10');
 
     rerender(<Button size="lg">Large</Button>);
     button = screen.getByRole('button', { name: /large/i });

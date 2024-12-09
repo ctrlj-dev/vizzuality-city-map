@@ -14,7 +14,7 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        toreabay: {
+        primary: {
           50: '#eff4fe',
           100: '#e2eafd',
           200: '#cad7fb',
@@ -27,7 +27,7 @@ export default {
           900: '#33347c',
           950: '#1e1e48',
         },
-        grenadier: {
+        secondary: {
           50: '#fef5ee',
           100: '#fde8d7',
           200: '#faccae',

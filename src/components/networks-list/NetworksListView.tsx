@@ -14,7 +14,7 @@ const NetworksListView = () => {
             height={28}
             alt="Cycle map rider logo"
           />
-          <h1 className="text-3xl font-semibold text-toreabay-800 leading-10 mb-4">
+          <h1 className="text-3xl font-semibold text-primary-800 leading-10 mb-4">
             Discover bike networks
           </h1>
           <p className=" text-zinc-500 text-sm">
