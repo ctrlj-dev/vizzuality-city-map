@@ -32,17 +32,21 @@ body {
 /* card.css */
 .card-action-animate::before {
   content: '';
-  @apply absolute inset-0 bg-white rounded-full translate-x-full transition-transform duration-500 ease-out z-0;
+  @apply absolute inset-0 bg-white rounded-full scale-x-0 origin-right transition-transform duration-300 ease-in-out z-0;
 }
 
 .card-animate:hover .card-action-animate::before {
-  @apply translate-x-0;
+  @apply scale-x-100;
 }
 
-.card-action-animate-button-bg {
-  @apply opacity-0 translate-x-full transition-all duration-500 ease-out relative;
+.card-action-animate-label {
+  @apply opacity-0 translate-x-5 transition-all duration-100 ease-out relative;
 }
 
-.card-animate:hover .card-action-animate-button-bg {
+.card-animate:hover .card-action-animate-label {
   @apply opacity-100 translate-x-0;
+}
+
+.lucide {
+  stroke-width: 1px;
 }

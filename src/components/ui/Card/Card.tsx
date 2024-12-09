@@ -45,7 +45,7 @@ const CardItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(' flex items-center gap-2 mb-2;', className)}
+    className={cn('flex items-center gap-2 mb-2;', className)}
     {...props}
   />
 ));
@@ -59,7 +59,7 @@ const CardAction = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        'absolute h-10 bottom-2 right-2 text-grenadier-500 flex items-center gap-1 px-4 py-1 overflow-hidden group',
+        'absolute h-10 bottom-2 right-0 flex items-center',
         className
       )}
       {...props}

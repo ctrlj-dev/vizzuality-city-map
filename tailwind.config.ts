@@ -14,7 +14,6 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        white: '#ffffff',
         toreabay: {
           50: '#eff4fe',
           100: '#e2eafd',

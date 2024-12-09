@@ -17,7 +17,7 @@ const NetworksListView = () => {
           <h1 className="text-3xl font-semibold text-toreabay-800 leading-10 mb-4">
             Discover bike networks
           </h1>
-          <p className="text-zinc-500 text-sm">
+          <p className=" text-zinc-500 text-sm">
             Discover bicycle stations worldwide with our user-friendly app.
             Locate nearby bike-sharing options and get real-time availability
             updates to enjoy eco-friendly transportation.

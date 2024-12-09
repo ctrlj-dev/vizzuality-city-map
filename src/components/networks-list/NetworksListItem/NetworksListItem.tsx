@@ -42,9 +42,9 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
           </span>
         </CardItem>
 
-        <CardAction className='card-action-animate'>
-          <Button variant="link" className="flex items-center group">
-            <span className="card-action-animate-button-bg">Details</span>
+        <CardAction className="card-action-animate">
+          <Button className="flex items-center group text-grenadier-500">
+            <span className="card-action-animate-label">Details</span>
             <ArrowRight
               className="ml-1 transition-transform duration-500 ease-out z-10"
               size={20}
