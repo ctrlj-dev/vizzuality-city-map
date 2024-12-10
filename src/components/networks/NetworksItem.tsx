@@ -14,7 +14,7 @@ interface Props {
   location: { city: string; country: string };
 }
 
-const NetworksListItem = ({ id, name, company, location }: Props) => {
+const NetworksItem = ({ id, name, company, location }: Props) => {
   return (
     <Card tabIndex={0} className="relative card-animate">
       <Link href={`/networks/${id}`} shallow>
@@ -58,4 +58,4 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
   );
 };
 
-export default NetworksListItem;
+export default NetworksItem;

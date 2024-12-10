@@ -1,4 +1,6 @@
-export const countries = [
+import { Country } from '../types/networks';
+
+export const countries: Country[] = [
   { code: 'AF', name: 'Afghanistan' },
   { code: 'AX', name: 'Aland Islands' },
   { code: 'AL', name: 'Albania' },

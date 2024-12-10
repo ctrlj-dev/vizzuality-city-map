@@ -1,7 +1,7 @@
 import { Search } from '@/components/ui/Search';
 
-const NetworksListSearch = () => {
+const NetworksSearch = () => {
   return <Search placeholder="Search network" />;
 };
 
-export default NetworksListSearch;
+export default NetworksSearch;

@@ -8,7 +8,7 @@ describe('Card Components', () => {
     const card = screen.getByTestId('card');
     expect(card).toBeInTheDocument();
     expect(card).toHaveClass(
-      'relative block px-4 py-2 rounded-sm border-b border-primary-100 hover:bg-primary-100 transition-colors cursor-pointer group'
+      'relative block px-4 py-4 rounded-sm border-b border-primary-100 hover:bg-primary-100 transition-colors cursor-pointer group'
     );
   });
 

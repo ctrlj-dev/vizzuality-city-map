@@ -1,4 +1,5 @@
 'use client';
+import { Option } from '@/lib/utils';
 import { X as CloseIcon, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '../Button';
@@ -6,13 +7,9 @@ import IconButton from '../IconButton/IconButton';
 import { ExtendedPopover as Popover } from '../Popover';
 import { Search } from '../Search';
 
-type Option = {
-  value: string;
-  label: string;
-};
-
 type ComboBoxProps = {
   label?: string;
+  icon?: React.ReactNode;
   options: Option[];
   value?: Option | null;
   onSelect?: (option: Option | null) => void;
@@ -20,6 +17,7 @@ type ComboBoxProps = {
 
 const Combobox = ({
   label = 'Select',
+  icon,
   options,
   value = null,
   onSelect,
@@ -31,12 +29,16 @@ const Combobox = ({
   const handleSelect = (option: Option) => {
     setSelectedOption(option);
     setOpen(false);
-    if (onSelect) onSelect(option);
+    if (onSelect) {
+      onSelect(option);
+    }
   };
 
   const handleClearSelection = () => {
     setSelectedOption(null);
-    if (onSelect) onSelect(null);
+    if (onSelect) {
+      onSelect(null);
+    }
   };
 
   const filteredOptions = options.filter(option =>
@@ -53,7 +55,11 @@ const Combobox = ({
             className="h-full flex items-center justify-between"
             onClick={() => setOpen(true)}
           >
-            <MapPin role="img" className="text-primary-800 mr-2" size={16} />
+            {icon ? (
+              icon
+            ) : (
+              <MapPin role="img" className="text-primary-800 mr-2" size={16} />
+            )}
             {selectedOption ? selectedOption.label : label}
           </Button>
           {selectedOption && (
@@ -70,19 +76,23 @@ const Combobox = ({
           )}
         </div>
       </Popover.Trigger>
-      <Popover.Content className="w-full p-2 bg-white border border-primary-200 rounded-lg">
+      <Popover.Content
+        align="end"
+        className="w-[200] p-0 bg-white border border-primary-200 rounded-lg"
+      >
         <Search
           placeholder="Search..."
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
-          className="mb-4"
+          className=" placeholder:text-primary-900/50 border-0 items-center border-zinc-400 border-b-2 rounded-b-none 
+          focus-within:ring-0 focus-within:ring-offset-0"
         />
-        <div className="max-h-48 overflow-y-auto">
+        <div className="max-h-48 overflow-y-auto p-2">
           {filteredOptions.length > 0 ? (
             filteredOptions.map(option => (
               <div
                 key={option.value}
-                className={`p-2 flex items-center cursor-pointer hover:bg-primary-100 hover:text-primary-900 ${
+                className={`p-2 flex items-center cursor-pointer hover:bg-primary-100 text-primary-900 ${
                   selectedOption?.value === option.value
                     ? 'bg-primary-100 text-primary-900'
                     : ''
@@ -90,7 +100,7 @@ const Combobox = ({
                 onClick={() => handleSelect(option)}
               >
                 {selectedOption?.value === option.value && (
-                  <div className="w-2 h-2 rounded-full bg-primary-800 mr-2" />
+                  <span className="w-2 h-2 rounded-full bg-primary-800 mr-2" />
                 )}
                 {option.label}
               </div>
