@@ -1,6 +1,15 @@
 import { Map } from '@/components/ui/Map';
 import Image from 'next/image';
+import { Combobox } from '../ui/Combobox';
 import { NetworksList } from './NetworksList';
+import NetworksListSearch from './NetworksList/NetworksListSearch';
+
+const options = [
+  { value: 'Es', label: 'Spain' },
+  { value: 'Eng', label: 'Englan' },
+  { value: 'Tr', label: 'Turkey' },
+  { value: 'Gr', label: 'Germany' },
+];
 
 const NetworksListView = () => {
   return (
@@ -22,6 +31,10 @@ const NetworksListView = () => {
             Locate nearby bike-sharing options and get real-time availability
             updates to enjoy eco-friendly transportation.
           </p>
+          <div className="h-12 flex gap-2 mt-4">
+            <NetworksListSearch />
+            <Combobox label="Country" options={options} />
+          </div>
         </header>
         <NetworksList />
       </aside>

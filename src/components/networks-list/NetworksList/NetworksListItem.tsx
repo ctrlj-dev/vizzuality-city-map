@@ -36,7 +36,7 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
           <h4 className="text-sm leading-7 text-zinc-500 whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
             {company.join(', ')}
           </h4>
-          <span className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-1.5 py-1">
+          <span className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-2 py-1">
             +2
           </span>
         </CardItem>

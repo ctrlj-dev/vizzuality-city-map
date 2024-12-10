@@ -26,7 +26,7 @@ body {
 
 /* aside.css */
 .main-aside {
-  @apply flex flex-col gap-4 h-full p-10;
+  @apply flex flex-col h-full p-10;
 }
 
 /* card.css */
