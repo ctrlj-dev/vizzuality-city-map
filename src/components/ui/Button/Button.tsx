@@ -14,11 +14,13 @@ export const buttonVariants = cva(
         outline:
           'border border-input border-primary-200 text-primary-800 bg-transparent hover:bg-primary-200 hover:text-primary-800',
         secondary: 'bg-background text-primary-800',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
       },
       size: {
         sm: 'h-10 px-2',
         default: 'h-9 px-4',
         lg: 'h-11 px-8',
+        icon: 'h-9 w-9',
       },
     },
     defaultVariants: {
