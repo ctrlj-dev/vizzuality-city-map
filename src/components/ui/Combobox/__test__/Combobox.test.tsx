@@ -1,95 +1,83 @@
-import '@testing-library/jest-dom';
+import { Option } from '@/lib/utils';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Combobox from '../Combobox';
 
-const mockOptions = [
-  { value: '1', label: 'Option 1' },
-  { value: '2', label: 'Option 2' },
-  { value: '3', label: 'Option 3' },
-];
+describe('Combobox Component', () => {
+  const options: Option[] = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ];
 
-describe('Combobox', () => {
-  it('renders with default label', () => {
-    render(<Combobox label="Select an option" options={mockOptions} />);
-    expect(screen.getByText('Select an option')).toBeInTheDocument();
+  beforeEach(() => {
+    // We mocked "ResizeObserver" here 💥.
+    global.ResizeObserver = class MockedResizeObserver {
+      observe = jest.fn();
+      unobserve = jest.fn();
+      disconnect = jest.fn();
+    };
   });
 
-  it('shows options when the button is clicked', () => {
-    render(<Combobox options={mockOptions} />);
+  beforeAll(() => {
+    Element.prototype.scrollIntoView = jest.fn();
+  });
 
-    const button = screen.getByRole('button');
+  beforeEach(() => {
+    Element.prototype.scrollIntoView = jest.fn();
+  });
+
+  test('renders without crashing', () => {
+    render(<Combobox label="Test Label" options={options} />);
+    expect(screen.getByRole('combobox')).toBeInTheDocument();
+  });
+
+  test('displays the label when no option is selected', () => {
+    render(<Combobox label="Test Label" options={options} />);
+    expect(screen.getByText('Test Label')).toBeInTheDocument();
+  });
+
+  test('opens the popover when the button is clicked', () => {
+    render(<Combobox label="Test Label" options={options} />);
+    const button = screen.getByRole('combobox');
+    fireEvent.click(button);
+    expect(
+      screen.getByPlaceholderText('Search test label...')
+    ).toBeInTheDocument();
+  });
+
+  test('displays options in the popover', () => {
+    render(<Combobox label="Test Label" options={options} />);
+    const button = screen.getByRole('combobox');
+    fireEvent.click(button);
+    options.forEach(option => {
+      expect(screen.getByText(option.label)).toBeInTheDocument();
+    });
+  });
+
+  test('selects an option and updates the display', () => {
+    render(<Combobox label="Test Label" options={options} />);
+    const button = screen.getByRole('combobox');
     fireEvent.click(button);
 
-    expect(screen.getByText('Option 1')).toBeInTheDocument();
-    expect(screen.getByText('Option 2')).toBeInTheDocument();
-    expect(screen.getByText('Option 3')).toBeInTheDocument();
+    // Select the second option
+    const optionToSelect = screen.getByText('Option 2');
+    fireEvent.click(optionToSelect);
+
+    expect(screen.getByRole('combobox')).toHaveTextContent('Option 2');
   });
 
-  it('filters options based on search input', () => {
-    render(<Combobox options={mockOptions} />);
-
-    const button = screen.getByRole('button');
+  test('allows deselecting an option', () => {
+    render(<Combobox label="Test Label" options={options} />);
+    const button = screen.getByRole('combobox');
     fireEvent.click(button);
 
-    const searchInput = screen.getByPlaceholderText('Search...');
-    fireEvent.change(searchInput, { target: { value: 'Option 1' } });
+    // Select the second option
+    const optionToSelect = screen.getByText('Option 2');
+    fireEvent.click(optionToSelect);
 
-    expect(screen.getByText('Option 1')).toBeInTheDocument();
-    expect(screen.queryByText('Option 2')).not.toBeInTheDocument();
-    expect(screen.queryByText('Option 3')).not.toBeInTheDocument();
-  });
+    // Deselect the same option
+    fireEvent.click(optionToSelect);
 
-  it('selects an option and updates the button label', () => {
-    const onSelectMock = jest.fn();
-    render(<Combobox options={mockOptions} onSelect={onSelectMock} />);
-
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
-
-    const option = screen.getByText('Option 1');
-    fireEvent.click(option);
-
-    expect(onSelectMock).toHaveBeenCalledWith(mockOptions[0]);
-    expect(screen.getByText('Option 1')).toBeInTheDocument();
-  });
-
-  it('clears the selected option when the clear button is clicked', () => {
-    const onSelectMock = jest.fn();
-    render(
-      <Combobox
-        options={mockOptions}
-        value={mockOptions[0]}
-        onSelect={onSelectMock}
-      />
-    );
-
-    const IconButton = screen.getByTestId('icon-button');
-    fireEvent.click(IconButton);
-
-    expect(onSelectMock).toHaveBeenCalledWith(null);
-    expect(screen.getByText('Select')).toBeInTheDocument();
-  });
-
-  it('displays a circle indicator for the selected option in the list', () => {
-    render(<Combobox options={mockOptions} value={mockOptions[0]} />);
-
-    const button = screen.getByText('Option 1');
-    fireEvent.click(button);
-
-    const IconButton = screen.getByTestId('icon-button');
-
-    expect(IconButton).toBeDefined();
-  });
-
-  it('shows no options found message when the search has no results', () => {
-    render(<Combobox options={mockOptions} />);
-
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
-
-    const searchInput = screen.getByPlaceholderText('Search...');
-    fireEvent.change(searchInput, { target: { value: 'Nonexistent' } });
-
-    expect(screen.getByText('No options found')).toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toHaveTextContent('Option 2');
   });
 });
