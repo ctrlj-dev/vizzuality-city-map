@@ -19,12 +19,14 @@ export type ComboBoxProps = {
   icon?: React.ReactNode;
   options: Option[];
   align?: 'center' | 'start' | 'end';
+  onSelect: (value: string) => void;
 };
 
 const Combobox = ({
   label,
   icon,
   options,
+  onSelect,
   align = 'center',
 }: ComboBoxProps) => {
   const [open, setOpen] = React.useState(false);
@@ -84,9 +86,10 @@ const Combobox = ({
                   key={option.value}
                   value={option.value}
                   onSelect={currentValue => {
-                    setSelectedValue(
-                      currentValue === selectedValue ? '' : currentValue
-                    );
+                    const value =
+                      currentValue === selectedValue ? '' : currentValue;
+                    setSelectedValue(value);
+                    onSelect(value);
                     setOpen(false);
                   }}
                   className={cn(

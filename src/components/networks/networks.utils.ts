@@ -1,15 +1,16 @@
-import { Country } from '@/lib/types/networks';
-import { Option } from '@/lib/utils';
+import { Network } from '@/lib/types/networks';
 
-const mapCountriesToOptions = (countries: Country[]): Option[] => {
-  if (!countries || countries.length === 0) {
-    return [];
-  }
+const ITEMS_PER_PAGE = 10;
 
-  return countries.map(country => ({
-    value: country.code,
-    label: country.name,
-  }));
+const paginatedNetworks = (
+  networks: Network[],
+  pageNumber: number,
+  itemsPerPage: number
+): Network[] => {
+  const startIndex = (pageNumber - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  return networks.slice(startIndex, endIndex);
 };
 
-export { mapCountriesToOptions };
+export { paginatedNetworks, ITEMS_PER_PAGE };

@@ -2,10 +2,9 @@ import { Map } from '@/components/ui/Map';
 import { Sidebar } from '@/components/ui/Sidebar';
 import { getNetworks } from '@/lib/services';
 import { NetworksWrapper } from './NetworksContext';
-import NetworksCountrySelector from './NetworksCountrySelector';
+import { NetworksFilters } from './NetworksFilters';
 import NetworksHeader from './NetworksHeader';
 import NetworksList from './NetworksList';
-import NetworksSearch from './NetworksSearch';
 
 const NetworksView = async () => {
   const networks = await getNetworks();
@@ -14,10 +13,7 @@ const NetworksView = async () => {
     <NetworksWrapper initialNetworks={networks}>
       <Sidebar>
         <NetworksHeader />
-        <div className="h-12 flex gap-2 mt-4">
-          <NetworksSearch />
-          <NetworksCountrySelector />
-        </div>
+        <NetworksFilters />
         <NetworksList />
       </Sidebar>
       <Map />
