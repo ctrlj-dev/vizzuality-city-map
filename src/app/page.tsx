@@ -1,5 +1,10 @@
 import { NetworksView } from '@/components/networks';
+import { Suspense } from 'react';
 
 export default function Home() {
-  return <NetworksView />;
+  return (
+    <Suspense>
+      <NetworksView />
+    </Suspense>
+  );
 }
