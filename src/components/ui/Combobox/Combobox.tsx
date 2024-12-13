@@ -17,6 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
 export type ComboBoxProps = {
   label?: string;
   icon?: React.ReactNode;
+  defaultValue?: string;
   options: Option[];
   align?: 'center' | 'start' | 'end';
   onSelect: (value: string) => void;
@@ -28,9 +29,10 @@ const Combobox = ({
   options,
   onSelect,
   align = 'center',
+  defaultValue,
 }: ComboBoxProps) => {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState('');
+  const [selectedValue, setSelectedValue] = React.useState(defaultValue || '');
   const label_ = label ? label : 'Option';
 
   const sortedOptions = options.sort(a => {

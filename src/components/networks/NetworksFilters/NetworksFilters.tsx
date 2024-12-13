@@ -1,32 +1,28 @@
 'use client';
 
-import { Combobox } from '@/components/ui/Combobox';
 import { Search } from '@/components/ui/Search';
-import { countries } from '@/lib/data';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import { NetworkAPIContext, NetworkStateContext } from '../NetworksContext';
-import { mapCountriesToOptions } from './networks-filters.utils';
+import NetworksFiltersCountry from './NetworksFiltersCountry';
 
-const COUNTRIES = mapCountriesToOptions(countries);
+const MemoizedNetworksFiltersCountry = memo(NetworksFiltersCountry);
 
 const NetworksFilters = () => {
   const { filters } = useContext(NetworkStateContext);
   const { handleSetFilters } = useContext(NetworkAPIContext);
   const router = useRouter();
   const params = useSearchParams();
-  const [search, setSearch] = useState('');
+  const initialSearch = params.get('search') || '';
+  const [search, setSearch] = useState(initialSearch);
 
-  const handleFilterSelect = (country: string) => {
+  const handleClearSearch = () => {
+    setSearch('');
     const updateQueryParams = new URLSearchParams(params.toString());
-    if (country) {
-      updateQueryParams.set('country', country);
-    } else {
-      updateQueryParams.delete('country');
-    }
+    updateQueryParams.delete('search');
 
     router.push(`${window.location.pathname}?${updateQueryParams.toString()}`);
-    handleSetFilters({ ...filters, country });
+    handleSetFilters({ ...filters, search: '' });
   };
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,13 +45,9 @@ const NetworksFilters = () => {
         placeholder="Search network"
         value={search}
         onChange={e => setSearch(e.target.value)}
+        onClear={handleClearSearch}
       />
-      <Combobox
-        onSelect={handleFilterSelect}
-        label="Country"
-        options={COUNTRIES}
-        align="end"
-      />
+      <MemoizedNetworksFiltersCountry />
     </form>
   );
 };
