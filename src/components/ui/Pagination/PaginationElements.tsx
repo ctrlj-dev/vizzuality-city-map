@@ -10,7 +10,7 @@ export const paginationVariants = cva(
   {
     variants: {
       variant: {
-        default:
+        ghost:
           'font-semibold hover:bg-primary-50 rounded p-2.5 transition-colors',
         active:
           'bg-primary-100 border border-primary-200 cursor-default hover:bg-primary-50',
@@ -23,7 +23,7 @@ export const paginationVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: 'ghost',
       size: 'default',
     },
   }
