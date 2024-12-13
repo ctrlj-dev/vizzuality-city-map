@@ -6,6 +6,7 @@ import {
   MapPin as MapPinIcon,
 } from 'lucide-react';
 import Link from 'next/link';
+import { getVisibleCompanies } from './networks.utils';
 
 interface Props {
   id: string;
@@ -15,6 +16,12 @@ interface Props {
 }
 
 const NetworksItem = ({ id, name, company, location }: Props) => {
+  const maxVisibleChars = 30; // Ancho máximo estimado en caracteres
+  const { visibleCompanies, hiddenCount } = getVisibleCompanies(
+    company,
+    maxVisibleChars
+  );
+
   return (
     <Card tabIndex={0} className="relative card-animate">
       <Link href={`/networks/${id}`} shallow>
@@ -34,11 +41,13 @@ const NetworksItem = ({ id, name, company, location }: Props) => {
             <BriefcaseIcon className="w-4 h-4 text-secondary-400" />
           </div>
           <h4 className="text-sm leading-7 text-zinc-500 whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
-            {company.join(', ')}
+            {visibleCompanies}
           </h4>
-          <span className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-2 py-1">
-            +2
-          </span>
+          {hiddenCount > 0 && company.length > 1 && (
+            <span className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-2 py-1">
+              + {hiddenCount}
+            </span>
+          )}
         </CardItem>
 
         <CardAction className="card-action-animate">

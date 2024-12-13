@@ -13,4 +13,19 @@ const paginatedNetworks = (
   return networks.slice(startIndex, endIndex);
 };
 
-export { paginatedNetworks, ITEMS_PER_PAGE };
+const getVisibleCompanies = (companies: string[], maxChars: number) => {
+  let visibleCompanies = companies[0];
+  let hiddenCount = 0;
+
+  companies.slice(1).forEach(company => {
+    if (visibleCompanies.length + 2 + company.length <= maxChars) {
+      visibleCompanies += `, ${company}`;
+    } else {
+      hiddenCount++;
+    }
+  });
+
+  return { visibleCompanies, hiddenCount };
+};
+
+export { getVisibleCompanies, ITEMS_PER_PAGE, paginatedNetworks };
