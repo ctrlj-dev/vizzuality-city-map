@@ -16,7 +16,7 @@ interface Props {
 }
 
 const NetworksItem = ({ id, name, company, location }: Props) => {
-  const maxVisibleChars = 30; // Ancho máximo estimado en caracteres
+  const maxVisibleChars = 30;
   const { visibleCompanies, hiddenCount } = getVisibleCompanies(
     company,
     maxVisibleChars
