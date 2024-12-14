@@ -1,10 +1,10 @@
-import { Map } from '@/components/ui/Map';
 import { Sidebar } from '@/components/ui/Sidebar';
 import { getNetworks } from '@/lib/services';
 import { NetworksWrapper } from './NetworksContext';
 import { NetworksFilters } from './NetworksFilters';
 import NetworksHeader from './NetworksHeader';
 import NetworksList from './NetworksList';
+import { NetworksMap } from './NetWorksMap';
 
 const NetworksView = async () => {
   const networks = await getNetworks();
@@ -16,7 +16,7 @@ const NetworksView = async () => {
         <NetworksFilters />
         <NetworksList />
       </Sidebar>
-      <Map />
+      <NetworksMap />
     </NetworksWrapper>
   );
 };
