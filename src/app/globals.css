@@ -24,12 +24,12 @@ body {
   @apply grid grid-cols-[551px_auto] w-screen h-screen;
 }
 
-/* aside.css */
+/* aside */
 .main-aside {
   @apply flex flex-col h-full p-10;
 }
 
-/* card.css */
+/* card */
 .card-action-animate::before {
   content: '';
   @apply absolute inset-0 bg-white rounded-full scale-x-0 origin-right transition-transform duration-300 ease-in-out z-0;
@@ -48,5 +48,29 @@ body {
 }
 
 .lucide {
-  stroke-width: 1px;
+  stroke-width: 1.2px;
+}
+
+/* mapbox zoom buttons */
+.mapbox-zoom-buttons {
+  @apply absolute top-8 right-8 flex flex-col space-y-2 bg-background rounded-full shadow-md;
+}
+.mapbox-zoom-buttons button {
+  @apply rounded-b-none w-8 h-8 px-1 pb-2 pt-4;
+}
+.mapbox-zoom-buttons button:last-child {
+  @apply rounded-t-none rounded-b-full pb-4 pt-2;
+}
+
+/* mapbox footer */
+.mapboxgl-control-container {
+  @apply absolute bottom-8 left-8;
+}
+
+/* mapbox popup */
+.mapboxgl-popup {
+  @apply absolute rounded-lg shadow-md shadow-black;
+}
+.mapboxgl-popup-content {
+  @apply p-4;
 }
