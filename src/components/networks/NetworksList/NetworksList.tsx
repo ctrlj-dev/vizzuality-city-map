@@ -1,17 +1,17 @@
 'use client';
 
 import { useContext } from 'react';
-import { ITEMS_PER_PAGE, paginatedNetworks } from './networks.utils';
-import { NetworkStateContext } from './NetworksContext';
-import NetworksItem from './NetworksItem';
-import NetworksPagination from './NetworksPagination';
-import NetworksSkeleton from './NetworksSkeleton';
+import { ITEMS_PER_PAGE, paginatedNetworks } from '../networks.utils';
+import { NetworkStateContext } from '../NetworksContext';
+import NetworksListItem from './NetworksListItem';
+import NetworksListPagination from './NetworksListPagination';
+import NetworksListSkeleton from './NetworksListSkeleton';
 
 const NetworksList = () => {
   const { networks, currentPage, loading } = useContext(NetworkStateContext);
 
   if (loading) {
-    return <NetworksSkeleton />;
+    return <NetworksListSkeleton />;
   }
 
   if (!networks || networks.length === 0) {
@@ -28,7 +28,7 @@ const NetworksList = () => {
     <div className="my-4">
       {paginatedData.length > 0 &&
         paginatedData.map(network => (
-          <NetworksItem
+          <NetworksListItem
             key={network.id}
             id={network.id}
             name={network.name}
@@ -36,7 +36,7 @@ const NetworksList = () => {
             location={network.location}
           />
         ))}
-      <NetworksPagination />
+      <NetworksListPagination />
     </div>
   );
 };

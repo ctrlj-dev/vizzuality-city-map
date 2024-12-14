@@ -3,7 +3,7 @@ import { countries } from '@/lib/data';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useContext } from 'react';
 import { NetworkAPIContext, NetworkStateContext } from '../NetworksContext';
-import { mapCountriesToOptions } from './networks-filters.utils';
+import { mapCountriesToOptions } from '../networks.utils';
 
 const COUNTRIES = mapCountriesToOptions(countries);
 

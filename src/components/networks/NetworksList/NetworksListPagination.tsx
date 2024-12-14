@@ -1,9 +1,9 @@
 import { Pagination } from '@/components/ui/Pagination';
 import { useContext } from 'react';
-import { NetworkAPIContext, NetworkStateContext } from './NetworksContext';
-import { ITEMS_PER_PAGE } from './networks.utils';
+import { NetworkAPIContext, NetworkStateContext } from '../NetworksContext';
+import { ITEMS_PER_PAGE } from '../networks.utils';
 
-const NetworksPagination = () => {
+const NetworksListPagination = () => {
   const { networks, currentPage } = useContext(NetworkStateContext);
   const { handleSetPage } = useContext(NetworkAPIContext);
 
@@ -33,4 +33,4 @@ const NetworksPagination = () => {
   );
 };
 
-export default NetworksPagination;
+export default NetworksListPagination;

@@ -4,8 +4,8 @@ import { Map } from '@/components/ui/Map';
 import { OnMarketClickEvent } from '@/components/ui/Map/Map';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
-import { NetworkStateContext } from '../NetworksContext';
-import { getNetworksMarkers } from '../networks.utils';
+import { NetworkStateContext } from './NetworksContext';
+import { getNetworksMarkers } from './networks.utils';
 
 const NetworksMap = () => {
   const { networks } = useContext(NetworkStateContext);

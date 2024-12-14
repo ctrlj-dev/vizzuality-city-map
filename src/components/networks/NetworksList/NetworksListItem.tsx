@@ -6,7 +6,7 @@ import {
   MapPin as MapPinIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { getVisibleCompanies } from './networks.utils';
+import { getVisibleCompanies } from '../networks.utils';
 
 interface Props {
   id: string;
@@ -15,7 +15,7 @@ interface Props {
   location: { city: string; country: string };
 }
 
-const NetworksItem = ({ id, name, company, location }: Props) => {
+const NetworksListItem = ({ id, name, company, location }: Props) => {
   const maxVisibleChars = 30;
   const { visibleCompanies, hiddenCount } = getVisibleCompanies(
     company,
@@ -67,4 +67,4 @@ const NetworksItem = ({ id, name, company, location }: Props) => {
   );
 };
 
-export default NetworksItem;
+export default NetworksListItem;

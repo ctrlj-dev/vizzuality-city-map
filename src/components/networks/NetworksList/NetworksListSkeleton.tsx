@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/Skeleton';
 
-const NetworksSkeleton = () => {
+const NetworksListSkeleton = () => {
   return (
     <div className="flex flex-col my-4">
       {Array.from({ length: 10 }).map((_, index) => (
@@ -12,4 +12,4 @@ const NetworksSkeleton = () => {
     </div>
   );
 };
-export default NetworksSkeleton;
+export default NetworksListSkeleton;
