@@ -10,12 +10,19 @@ export type Location = {
   longitude: number;
 };
 
-export type License = {
+type License = {
   name: string;
   url: string;
 };
 
 export type Network = {
+  company: string[];
+  id: string;
+  location: Location;
+  name: string;
+};
+
+type NetworkResponse = {
   company: string[];
   href: string;
   id: string;
@@ -28,5 +35,5 @@ export type Network = {
 };
 
 export type NetWorksResponse = {
-  networks: Network[];
+  networks: NetworkResponse[];
 };
