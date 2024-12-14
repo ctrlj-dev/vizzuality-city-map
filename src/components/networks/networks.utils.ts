@@ -1,6 +1,7 @@
 import { Network } from '@/lib/types/networks';
+import { Marker } from '../ui/Map/Map';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 5;
 
 const paginatedNetworks = (
   networks: Network[],
@@ -28,4 +29,19 @@ const getVisibleCompanies = (companies: string[], maxChars: number) => {
   return { visibleCompanies, hiddenCount };
 };
 
-export { getVisibleCompanies, ITEMS_PER_PAGE, paginatedNetworks };
+const getNetworksMarkers = (nerworks: Network[]): Marker[] => {
+  return nerworks.map(network => {
+    return {
+      id: network.id,
+      longitude: network.location.longitude,
+      latitude: network.location.latitude,
+    };
+  });
+};
+
+export {
+  getNetworksMarkers,
+  getVisibleCompanies,
+  ITEMS_PER_PAGE,
+  paginatedNetworks,
+};
