@@ -20,6 +20,7 @@ export type Marker<Properties = Record<string, unknown>> = {
 
 export type MapProps = {
   id: string;
+  iniitalZoom?: number;
   markers: Marker[];
   onMarkerClick?: (event: OnMarketMouseEvent) => void;
   onMarkerHover?: (event: OnMarketMouseEvent) => void;
@@ -61,7 +62,6 @@ export const Map = ({
       style: 'mapbox://styles/mapbox/light-v11',
       container: mapRef.current,
       center: getInitialPosition(markers),
-      zoom: markers.length > 0 ? 9 : 2,
       projection: {
         name: 'mercator',
         center: [0, 30],
@@ -137,19 +137,18 @@ export const Map = ({
         source.setData(data);
       }
 
-      if (markers.length > 0 && map.current) {
+      if (markers.length > 0) {
         const bounds = calculateBounds(markers);
-
         if (bounds) {
           map.current.fitBounds(bounds, {
-            padding: 20,
+            padding: 60,
             essential: true,
-            maxZoom: 10,
+            maxZoom: 15,
           });
         }
       }
     }
-  }, [markers]);
+  }, [location, markers]);
 
   return (
     <div className="relative h-full w-full">
