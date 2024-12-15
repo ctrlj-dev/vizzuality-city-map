@@ -124,6 +124,7 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
           type: 'FeatureCollection',
           features: markers.map(marker => ({
             type: 'Feature',
+            center: getInitialPosition(markers),
             properties: {
               id: marker.id,
               ...(marker.name && { name: marker.name }),
