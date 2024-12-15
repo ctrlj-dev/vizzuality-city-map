@@ -21,6 +21,7 @@ const StationsHeader = () => {
       />
       <div className="relative flex flex-col items-start p-10 z-20">
         <Link
+          role="link"
           className="flex items-center bg-white w-10 h-10 rounded-full py-1 px-2 mb-10"
           href="/"
           shallow

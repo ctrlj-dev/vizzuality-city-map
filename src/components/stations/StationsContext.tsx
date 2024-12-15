@@ -10,15 +10,14 @@ import {
 
 type SortBy = 'freeBikes' | 'emptySlots' | null;
 
-type StationsState = {
+export type StationsState = {
   stations: StationList;
-  loading: boolean;
   currentPage: number;
   sortBy: SortBy;
   isAscending: boolean;
 };
 
-type StationsAPI = {
+export type StationsAPI = {
   handleSetStations: (Stations: StationList) => void;
   handleSetPage: (page: number) => void;
   handleSort: (column: 'freeBikes' | 'emptySlots') => void;
@@ -55,7 +54,6 @@ const StationsReducer = (
       return {
         ...state,
         stations: action.payload,
-        loading: false,
         currentPage: 1,
       };
     case StationsActionType.SET_CURRENT_PAGE:
@@ -85,7 +83,6 @@ export const StationsWrapper: FC<StationsWrapperProps> = ({
 }) => {
   const [state, dispatch] = useReducer(StationsReducer, {
     stations: initialStations,
-    loading: true,
     currentPage: 1,
     sortBy: null,
     isAscending: true,
