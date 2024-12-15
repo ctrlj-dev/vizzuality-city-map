@@ -126,9 +126,9 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
             type: 'Feature',
             properties: {
               id: marker.id,
-              ...(marker.description && {
-                description: marker.description,
-              }),
+              ...(marker.name && { name: marker.name }),
+              ...(marker.freeBikes && { freeBikes: marker.freeBikes }),
+              ...(marker.emptySlots && { emptySlots: marker.emptySlots }),
             },
             geometry: {
               type: 'Point',

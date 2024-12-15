@@ -20,7 +20,6 @@ const calculateBounds = (markers: Marker[]): LngLatBoundsLike => {
   ];
 };
 
-
 const getInitialPosition = (markers: Marker[]): [number, number] => {
   if (!markers) {
     return [0, 0];

@@ -1,9 +1,8 @@
 import { ArrowDownUp } from 'lucide-react';
 import { useContext } from 'react';
-import { StationsAPIContext, StationsStateContext } from '../StationsContext';
+import { StationsAPIContext } from '../StationsContext';
 
 const StationsTableHeader = () => {
-  const { sortBy, isAscending } = useContext(StationsStateContext);
   const { handleSort } = useContext(StationsAPIContext);
 
   return (

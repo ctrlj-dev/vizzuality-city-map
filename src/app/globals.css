@@ -21,7 +21,7 @@ body {
 }
 
 .main-container {
-  @apply grid grid-cols-[551px_auto] 
+  @apply grid grid-cols-[551px_auto];
 }
 
 /* aside */
@@ -64,7 +64,6 @@ body {
 
 /* mapbox canvas */
 .mapboxgl-canvas {
-
 }
 
 /* mapbox footer */
@@ -80,7 +79,7 @@ body {
   @apply p-4 shadow-md shadow-black;
 }
 .mapboxgl-popup-close-button {
-    display: none
+  display: none;
 }
 
 /* station table */
