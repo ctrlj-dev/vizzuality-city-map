@@ -1,0 +1,125 @@
+'use client';
+import { StationList } from '@/lib/types';
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useMemo,
+  useReducer,
+} from 'react';
+
+type SortBy = 'freeBikes' | 'emptySlots' | null;
+
+type StationsState = {
+  stations: StationList;
+  loading: boolean;
+  currentPage: number;
+  sortBy: SortBy;
+  isAscending: boolean;
+};
+
+type StationsAPI = {
+  handleSetStations: (Stations: StationList) => void;
+  handleSetPage: (page: number) => void;
+  handleSort: (column: 'freeBikes' | 'emptySlots') => void;
+};
+
+export const StationsStateContext = createContext<StationsState>(
+  {} as StationsState
+);
+export const StationsAPIContext = createContext<StationsAPI>({} as StationsAPI);
+
+StationsStateContext.displayName = 'StationsStateContext';
+StationsAPIContext.displayName = 'StationsApiContext';
+
+enum StationsActionType {
+  SET_STATIONS = 'SET_STATIONS',
+  SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
+  SET_SORT = 'SET_SORT',
+}
+
+type StationsAction =
+  | { type: StationsActionType.SET_STATIONS; payload: StationList }
+  | { type: StationsActionType.SET_CURRENT_PAGE; payload: number }
+  | {
+      type: StationsActionType.SET_SORT;
+      payload: { sortBy: SortBy; isAscending: boolean };
+    };
+
+const StationsReducer = (
+  state: StationsState,
+  action: StationsAction
+): StationsState => {
+  switch (action.type) {
+    case StationsActionType.SET_STATIONS:
+      return {
+        ...state,
+        stations: action.payload,
+        loading: false,
+        currentPage: 1,
+      };
+    case StationsActionType.SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+    case StationsActionType.SET_SORT:
+      const { sortBy, isAscending } = action.payload;
+      return {
+        ...state,
+        sortBy,
+        isAscending,
+      };
+    default:
+      return state;
+  }
+};
+
+type StationsWrapperProps = PropsWithChildren & {
+  initialStations: StationList;
+};
+
+export const StationsWrapper: FC<StationsWrapperProps> = ({
+  initialStations,
+  children,
+}) => {
+  const [state, dispatch] = useReducer(StationsReducer, {
+    stations: initialStations,
+    loading: true,
+    currentPage: 1,
+    sortBy: null,
+    isAscending: true,
+  });
+
+  const api: StationsAPI = useMemo(() => {
+    return {
+      handleSetStations(stations: StationList) {
+        dispatch({
+          type: StationsActionType.SET_STATIONS,
+          payload: stations,
+        });
+      },
+      handleSetPage(number: number) {
+        dispatch({
+          type: StationsActionType.SET_CURRENT_PAGE,
+          payload: number,
+        });
+      },
+      handleSort(column: 'freeBikes' | 'emptySlots') {
+        const isAscending = state.sortBy === column ? !state.isAscending : true;
+        dispatch({
+          type: StationsActionType.SET_SORT,
+          payload: { sortBy: column, isAscending },
+        });
+      },
+    };
+  }, [state.sortBy, state.isAscending]);
+
+  return (
+    <StationsAPIContext.Provider value={api}>
+      <StationsStateContext.Provider value={state}>
+        {children}
+      </StationsStateContext.Provider>
+    </StationsAPIContext.Provider>
+  );
+};

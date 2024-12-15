@@ -1,6 +1,11 @@
 import { config } from '../config';
+import { StationList, StationsListResponse } from '../types';
 import { Network, NetWorksResponse } from '../types/networks';
-import { networksResponseToNetworks } from './mappers/cityBikeApi.mappers';
+import {
+  networksResponseToNetworks,
+  stationNotFound,
+  stationsResponseToStations,
+} from './mappers/cityBikeApi.mappers';
 
 const API_BASE_URL = config.apiBaseUrl;
 
@@ -27,4 +32,22 @@ async function getNetworks(): Promise<Network[]> {
   }
 }
 
-export { getNetworks };
+async function getStations(id: string): Promise<StationList> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${id}`);
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch stations: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const jsonData: StationsListResponse = await response.json();
+    return stationsResponseToStations(jsonData);
+  } catch (err) {
+    console.error('Error fetching stations:', err);
+    return stationNotFound;
+  }
+}
+
+export { getNetworks, getStations };

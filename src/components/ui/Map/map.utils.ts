@@ -20,4 +20,24 @@ const calculateBounds = (markers: Marker[]): LngLatBoundsLike => {
   ];
 };
 
-export { calculateBounds };
+
+const getInitialPosition = (markers: Marker[]): [number, number] => {
+  if (!markers) {
+    return [0, 0];
+  }
+
+  const latitudes = markers.map(marker => marker.latitude);
+  const longitudes = markers.map(marker => marker.longitude);
+
+  const minLat = Math.min(...latitudes);
+  const maxLat = Math.max(...latitudes);
+  const minLng = Math.min(...longitudes);
+  const maxLng = Math.max(...longitudes);
+
+  const centerLat = (minLat + maxLat) / 2;
+  const centerLng = (minLng + maxLng) / 2;
+
+  return [centerLng, centerLat];
+};
+
+export { calculateBounds, getInitialPosition };

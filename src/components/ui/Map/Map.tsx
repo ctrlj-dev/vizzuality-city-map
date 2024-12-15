@@ -1,14 +1,19 @@
+'use client';
+
 import { useUserLocation } from '@/lib/hooks/useUserLocation';
 import mapboxgl, { SourceSpecification } from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
 import { MapControlsLocation, MapControlsZoom } from './MapControls';
-import { calculateBounds } from './map.utils';
+import { calculateBounds, getInitialPosition } from './map.utils';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 
 export type Marker = {
   id: string;
-  description?: React.ReactNode;
+  name?: string;
+  freeBikes?: number;
+  emptySlots?: number;
   longitude: number;
   latitude: number;
 };
@@ -34,6 +39,7 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
     map.current = new mapboxgl.Map({
       style: 'mapbox://styles/mapbox/light-v11',
       container: mapRef.current,
+      center: getInitialPosition(markers),
       zoom: markers.length > 0 ? 9 : 2,
       projection: {
         name: 'mercator',
@@ -52,7 +58,9 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
             type: 'Feature',
             properties: {
               id: marker.id,
-              ...(marker.description && { description: marker.description }),
+              ...(marker.name && { name: marker.name }),
+              ...(marker.freeBikes && { freeBikes: marker.freeBikes }),
+              ...(marker.emptySlots && { emptySlots: marker.emptySlots }),
             },
             geometry: {
               type: 'Point',
@@ -145,8 +153,8 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
   }, [markers]);
 
   return (
-    <div className="relative">
-      <div ref={mapRef} className="absolute top-0 bottom-0 w-full"></div>
+    <div className="relative h-full w-full">
+      <div ref={mapRef} className="h-full w-full"></div>
       <MapControlsZoom ref={map} />
       <MapControlsLocation ref={map} location={location} />
     </div>

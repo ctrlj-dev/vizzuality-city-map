@@ -2,18 +2,7 @@ import { Country, Network } from '@/lib/types/networks';
 import { Option } from '@/lib/utils';
 import { Marker } from '../ui/Map/Map';
 
-const ITEMS_PER_PAGE = 5;
-
-const paginatedNetworks = (
-  networks: Network[],
-  pageNumber: number,
-  itemsPerPage: number
-): Network[] => {
-  const startIndex = (pageNumber - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  return networks.slice(startIndex, endIndex);
-};
+const NETWORKS_PER_PAGE = 5;
 
 const getVisibleCompanies = (companies: string[], maxChars: number) => {
   let visibleCompanies = companies[0];
@@ -54,7 +43,7 @@ const mapCountriesToOptions = (countries: Country[]): Option[] => {
 export {
   getNetworksMarkers,
   getVisibleCompanies,
-  ITEMS_PER_PAGE,
   mapCountriesToOptions,
-  paginatedNetworks,
+  NETWORKS_PER_PAGE,
 };
+

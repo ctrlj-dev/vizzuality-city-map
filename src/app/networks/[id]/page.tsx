@@ -1,7 +1,15 @@
-export default async function DetailPage() {
+import { StationsView } from '@/components/stations';
+import { Suspense } from 'react';
+
+type StationsPageProps = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function StationsPage({ params }: StationsPageProps) {
+  const id = (await params).id;
   return (
-    <div>
-      <h1>Detail page</h1>
-    </div>
+    <Suspense>
+      <StationsView id={id} />
+    </Suspense>
   );
 }

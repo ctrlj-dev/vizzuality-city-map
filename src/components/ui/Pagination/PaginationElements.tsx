@@ -10,6 +10,7 @@ export const paginationVariants = cva(
   {
     variants: {
       variant: {
+        dark: 'text-white font-semibold hover:bg-primary-50 hover:text-primary-800 rounded p-2.5 transition-colors',
         ghost:
           'font-semibold hover:bg-primary-50 rounded p-2.5 transition-colors',
         active:
@@ -61,59 +62,73 @@ PaginationItem.displayName = 'PaginationItem';
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  theme?: 'light' | 'dark';
 } & Pick<ButtonProps, 'size'> &
   React.ComponentProps<'a'>;
 
 const PaginationLink = ({
   className,
   isActive,
+  theme = 'light',
   size = 'icon',
   ...props
-}: PaginationLinkProps) => (
-  <a
-    aria-current={isActive ? 'page' : undefined}
-    className={cn(
-      paginationVariants({
-        variant: isActive ? 'active' : 'ghost',
-        size,
-      }),
-      className
-    )}
-    {...props}
-  />
-);
+}: PaginationLinkProps) => {
+  const variant = theme === 'light' ? 'ghost' : 'dark';
+  return (
+    <a
+      aria-current={isActive ? 'page' : undefined}
+      className={cn(
+        paginationVariants({
+          variant: isActive ? 'active' : variant,
+          size,
+        }),
+        className
+      )}
+      {...props}
+    />
+  );
+};
+
 PaginationLink.displayName = 'PaginationLink';
 
 const PaginationPrevious = ({
   className,
+  theme,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink
-    aria-label="Go to previous page"
-    size="default"
-    className={cn('gap-1 pl-2.5', className)}
-    {...props}
-  >
-    <ChevronLeft className="h-4 w-4" />
-    <span>Previous</span>
-  </PaginationLink>
-);
+}: React.ComponentProps<typeof PaginationLink>) => {
+  const variant = theme === 'light' ? 'text-primary-800' : 'text-white';
+  return (
+    <PaginationLink
+      aria-label="Go to previous page"
+      size="default"
+      className={cn(`gap-1 pl-2.5 variant ${variant}`, className)}
+      {...props}
+    >
+      <ChevronLeft className="h-4 w-4" />
+      <span>Previous</span>
+    </PaginationLink>
+  );
+};
 PaginationPrevious.displayName = 'PaginationPrevious';
 
 const PaginationNext = ({
   className,
+  theme,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink
-    aria-label="Go to next page"
-    size="default"
-    className={cn('gap-1 pr-2.5', className)}
-    {...props}
-  >
-    <span>Next</span>
-    <ChevronRight className="h-4 w-4" />
-  </PaginationLink>
-);
+}: React.ComponentProps<typeof PaginationLink>) => {
+  const variant = theme === 'light' ? 'text-primary-800' : 'text-white';
+  return (
+    <PaginationLink
+      aria-label="Go to next page"
+      size="default"
+      className={cn(`gap-1 pl-2.5 variant ${variant}`, className)}
+      {...props}
+    >
+      <span>Next</span>
+      <ChevronRight className="h-4 w-4" />
+    </PaginationLink>
+  );
+};
 PaginationNext.displayName = 'PaginationNext';
 
 const PaginationEllipsis = ({
@@ -140,3 +155,4 @@ export {
   PaginationPrevious,
   Pagination as PaginationRoot,
 };
+

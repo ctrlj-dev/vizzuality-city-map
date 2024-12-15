@@ -1,13 +1,13 @@
 import { Pagination } from '@/components/ui/Pagination';
 import { useContext } from 'react';
-import { NetworkAPIContext, NetworkStateContext } from '../NetworksContext';
-import { NETWORKS_PER_PAGE } from '../networks.utils';
+import { StationsAPIContext, StationsStateContext } from '../StationsContext';
+import { STATIONS_PER_PAGE } from '../stations.utils';
 
-const NetworksListPagination = () => {
-  const { networks, currentPage } = useContext(NetworkStateContext);
-  const { handleSetPage } = useContext(NetworkAPIContext);
+const StationsTablePagination = () => {
+  const { stations, currentPage } = useContext(StationsStateContext);
+  const { handleSetPage } = useContext(StationsAPIContext);
 
-  const totalPages = Math.ceil(networks.length / NETWORKS_PER_PAGE);
+  const totalPages = Math.ceil(stations.stations.length / STATIONS_PER_PAGE);
 
   const handlePreviousPage = () => {
     handleSetPage(Math.max(currentPage - 1, 1));
@@ -23,6 +23,7 @@ const NetworksListPagination = () => {
 
   return (
     <Pagination
+      theme="dark"
       className="mt-6"
       totalPages={totalPages}
       currentPage={currentPage}
@@ -33,4 +34,4 @@ const NetworksListPagination = () => {
   );
 };
 
-export default NetworksListPagination;
+export default StationsTablePagination;

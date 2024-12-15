@@ -1,7 +1,8 @@
 'use client';
 
+import { paginatedElements } from '@/lib/utils';
 import { useContext } from 'react';
-import { ITEMS_PER_PAGE, paginatedNetworks } from '../networks.utils';
+import { NETWORKS_PER_PAGE } from '../networks.utils';
 import { NetworkStateContext } from '../NetworksContext';
 import NetworksListItem from './NetworksListItem';
 import NetworksListPagination from './NetworksListPagination';
@@ -18,10 +19,10 @@ const NetworksList = () => {
     return <p className="mt-8 text-primary-800">No networks available...</p>;
   }
 
-  const paginatedData = paginatedNetworks(
+  const paginatedData = paginatedElements(
     networks,
     currentPage,
-    ITEMS_PER_PAGE
+    NETWORKS_PER_PAGE
   );
 
   return (
