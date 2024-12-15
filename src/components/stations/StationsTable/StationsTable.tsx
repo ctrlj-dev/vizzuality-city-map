@@ -24,7 +24,7 @@ export const StationsTable = () => {
   });
 
   return (
-    <div className="bg-primary-800 text-white px-10 pb-5">
+    <div className="bg-primary-800 text-white px-4 md:px-10 pb-5">
       <p tabIndex={0} className="mt-2 mb-4">
         All
         <span className="mx-2 border px-3 py-0 border-secondary-400 text-secondary-400">
@@ -32,33 +32,35 @@ export const StationsTable = () => {
         </span>
         stations
       </p>
-      <table className="w-full text-left border-collapse">
-        <StationsTableHeader />
-        <tbody>
-          {sortedStations.map(station => (
-            <tr key={station.id}>
-              <td
-                tabIndex={0}
-                className="px-4 py-6 border-b border-dotted border-opacity-50 border-white"
-              >
-                {station.name}
-              </td>
-              <td
-                tabIndex={0}
-                className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
-              >
-                {station.freeBikes}
-              </td>
-              <td
-                tabIndex={0}
-                className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
-              >
-                {station.emptySlots}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-left border-collapse">
+          <StationsTableHeader />
+          <tbody>
+            {sortedStations.map(station => (
+              <tr key={station.id}>
+                <td
+                  tabIndex={0}
+                  className="px-4 py-6 border-b border-dotted border-opacity-50 border-white"
+                >
+                  {station.name}
+                </td>
+                <td
+                  tabIndex={0}
+                  className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
+                >
+                  {station.freeBikes}
+                </td>
+                <td
+                  tabIndex={0}
+                  className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
+                >
+                  {station.emptySlots}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <StationsTablePagination />
     </div>
   );

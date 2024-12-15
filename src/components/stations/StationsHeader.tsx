@@ -29,7 +29,7 @@ const StationsHeader = ({
         sizes="100vw"
         className="-z-0 absolute object-cover"
       />
-      <div className="relative flex flex-col items-start p-10 z-20">
+      <div className="relative flex flex-col items-start p-4 pb-10 md:p-10 z-20">
         <Link
           tabIndex={0}
           role="link"

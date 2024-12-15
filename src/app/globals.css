@@ -21,12 +21,7 @@ body {
 }
 
 .main-container {
-  @apply grid grid-cols-[551px_auto];
-}
-
-/* aside */
-.main-aside {
-  @apply flex flex-col h-full p-10;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[551px_auto];
 }
 
 /* card */
@@ -60,10 +55,6 @@ body {
 }
 .mapbox-zoom-buttons button:last-child {
   @apply rounded-t-none rounded-b-full pb-4 pt-2;
-}
-
-/* mapbox canvas */
-.mapboxgl-canvas {
 }
 
 /* mapbox footer */
