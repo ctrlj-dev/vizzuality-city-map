@@ -95,7 +95,7 @@ const Combobox = ({
                     setOpen(false);
                   }}
                   className={cn(
-                    'flex items-center',
+                    'flex items-center py-2',
                     selectedValue === option.value
                       ? 'bg-primary-100 text-primary-900'
                       : 'hover:bg-primary-100 hover:text-primary-900',

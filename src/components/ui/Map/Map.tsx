@@ -157,7 +157,7 @@ export const Map = ({
   }, [location, markers]);
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full hidden md:block">
       <div ref={mapRef} className="h-full w-full"></div>
       {showZoomControl && <MemoizedMapControlsZoom ref={map} />}
       {showNearmeControl && (
