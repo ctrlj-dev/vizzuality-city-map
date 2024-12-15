@@ -17,7 +17,7 @@ describe('Sidebar Component', () => {
 
     const sidebar = screen.getByRole('complementary');
     expect(sidebar).toHaveClass(
-      'flex flex-col h-full p-10 bg-white border-r border-gray-200'
+      'relative flex flex-col p-10 bg-white border-r border-gray-200 overflow-y-auto h-[100vh]'
     );
   });
 

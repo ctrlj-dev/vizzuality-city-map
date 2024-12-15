@@ -76,6 +76,7 @@ const PaginationLink = ({
   const variant = theme === 'light' ? 'ghost' : 'dark';
   return (
     <a
+      role="link"
       aria-current={isActive ? 'page' : undefined}
       className={cn(
         paginationVariants({

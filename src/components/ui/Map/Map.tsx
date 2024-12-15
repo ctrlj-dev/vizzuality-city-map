@@ -20,8 +20,9 @@ export type Marker<Properties = Record<string, unknown>> = {
 
 export type MapProps = {
   id: string;
-  iniitalZoom?: number;
   markers: Marker[];
+  showNearmeControl?: boolean;
+  showZoomControl?: boolean;
   onMarkerClick?: (event: OnMarketMouseEvent) => void;
   onMarkerHover?: (event: OnMarketMouseEvent) => void;
   onMarkerLeave?: (event: OnMarketMouseEvent) => void;
@@ -32,6 +33,8 @@ export const Map = ({
   onMarkerClick,
   onMarkerHover,
   onMarkerLeave,
+  showNearmeControl = true,
+  showZoomControl = true,
   markers,
 }: MapProps) => {
   const { location } = useUserLocation();
@@ -153,8 +156,10 @@ export const Map = ({
   return (
     <div className="relative h-full w-full">
       <div ref={mapRef} className="h-full w-full"></div>
-      <MapControlsZoom ref={map} />
-      <MapControlsLocation ref={map} location={location} />
+      {showZoomControl && <MapControlsZoom ref={map} />}
+      {showNearmeControl && (
+        <MapControlsLocation ref={map} location={location} />
+      )}
     </div>
   );
 };

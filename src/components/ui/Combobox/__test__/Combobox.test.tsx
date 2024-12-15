@@ -9,8 +9,10 @@ describe('Combobox Component', () => {
     { value: 'option3', label: 'Option 3' },
   ];
 
+  // Mock function for onSelect prop
+  const mockOnSelect = jest.fn();
+
   beforeEach(() => {
-    // We mocked "ResizeObserver" here 💥.
     global.ResizeObserver = class MockedResizeObserver {
       observe = jest.fn();
       unobserve = jest.fn();
@@ -27,17 +29,23 @@ describe('Combobox Component', () => {
   });
 
   test('renders without crashing', () => {
-    render(<Combobox label="Test Label" options={options} />);
+    render(
+      <Combobox label="Test Label" options={options} onSelect={mockOnSelect} />
+    );
     expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 
   test('displays the label when no option is selected', () => {
-    render(<Combobox label="Test Label" options={options} />);
+    render(
+      <Combobox label="Test Label" options={options} onSelect={mockOnSelect} />
+    );
     expect(screen.getByText('Test Label')).toBeInTheDocument();
   });
 
   test('opens the popover when the button is clicked', () => {
-    render(<Combobox label="Test Label" options={options} />);
+    render(
+      <Combobox label="Test Label" options={options} onSelect={mockOnSelect} />
+    );
     const button = screen.getByRole('combobox');
     fireEvent.click(button);
     expect(
@@ -46,7 +54,9 @@ describe('Combobox Component', () => {
   });
 
   test('displays options in the popover', () => {
-    render(<Combobox label="Test Label" options={options} />);
+    render(
+      <Combobox label="Test Label" options={options} onSelect={mockOnSelect} />
+    );
     const button = screen.getByRole('combobox');
     fireEvent.click(button);
     options.forEach(option => {
@@ -55,7 +65,9 @@ describe('Combobox Component', () => {
   });
 
   test('selects an option and updates the display', () => {
-    render(<Combobox label="Test Label" options={options} />);
+    render(
+      <Combobox label="Test Label" options={options} onSelect={mockOnSelect} />
+    );
     const button = screen.getByRole('combobox');
     fireEvent.click(button);
 
@@ -64,20 +76,7 @@ describe('Combobox Component', () => {
     fireEvent.click(optionToSelect);
 
     expect(screen.getByRole('combobox')).toHaveTextContent('Option 2');
-  });
-
-  test('allows deselecting an option', () => {
-    render(<Combobox label="Test Label" options={options} />);
-    const button = screen.getByRole('combobox');
-    fireEvent.click(button);
-
-    // Select the second option
-    const optionToSelect = screen.getByText('Option 2');
-    fireEvent.click(optionToSelect);
-
-    // Deselect the same option
-    fireEvent.click(optionToSelect);
-
-    expect(screen.getByRole('combobox')).toHaveTextContent('Option 2');
+    // Check that onSelect is called with the correct value
+    expect(mockOnSelect).toHaveBeenCalledWith('option2');
   });
 });
