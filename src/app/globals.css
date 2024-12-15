@@ -71,11 +71,6 @@ body {
   @apply rounded-t-none rounded-b-full pb-4 pt-2;
 }
 
-/* mapbox footer */
-.mapboxgl-control-container {
-  @apply absolute bottom-8 left-8;
-}
-
 /* mapbox popup */
 .mapboxgl-popup {
   @apply rounded-lg;
