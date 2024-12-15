@@ -7,7 +7,7 @@ const StationsTablePagination = () => {
   const { stations, currentPage } = useContext(StationsStateContext);
   const { handleSetPage } = useContext(StationsAPIContext);
 
-  const totalPages = Math.ceil(stations.stations.length / STATIONS_PER_PAGE);
+  const totalPages = Math.ceil(stations.length / STATIONS_PER_PAGE);
 
   const handlePreviousPage = () => {
     handleSetPage(Math.max(currentPage - 1, 1));

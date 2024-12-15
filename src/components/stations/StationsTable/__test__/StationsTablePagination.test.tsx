@@ -1,4 +1,4 @@
-import { StationList } from '@/lib/types';
+import { Station } from '@/lib/types';
 import { fireEvent, render, screen } from '@testing-library/react';
 import {
   StationsAPI,
@@ -8,26 +8,23 @@ import {
 } from '../../StationsContext';
 import StationsTablePagination from '../StationsTablePagination';
 
-const mockStations = {
-  stations: [
-    { id: '1', name: 'Station A', freeBikes: 5, emptySlots: 10 },
-    { id: '2', name: 'Station B', freeBikes: 0, emptySlots: 15 },
-    { id: '3', name: 'Station C', freeBikes: 3, emptySlots: 12 },
-    { id: '4', name: 'Station D', freeBikes: 2, emptySlots: 8 },
-    { id: '5', name: 'Station E', freeBikes: 1, emptySlots: 9 },
-    { id: '6', name: 'Station F', freeBikes: 5, emptySlots: 10 },
-    { id: '7', name: 'Station G', freeBikes: 0, emptySlots: 15 },
-    { id: '8', name: 'Station H', freeBikes: 3, emptySlots: 12 },
-    { id: '9', name: 'Station I', freeBikes: 2, emptySlots: 8 },
-    { id: '10', name: 'Station J', freeBikes: 1, emptySlots: 9 },
-    { id: '11', name: 'Station K', freeBikes: 1, emptySlots: 9 },
-    { id: '12', name: 'Station L', freeBikes: 1, emptySlots: 9 },
-    { id: '13', name: 'Station M', freeBikes: 1, emptySlots: 9 },
-  ],
-};
-
+const mockStations = [
+  { id: '1', name: 'Station A', freeBikes: 5, emptySlots: 10 },
+  { id: '2', name: 'Station B', freeBikes: 0, emptySlots: 15 },
+  { id: '3', name: 'Station C', freeBikes: 3, emptySlots: 12 },
+  { id: '4', name: 'Station D', freeBikes: 2, emptySlots: 8 },
+  { id: '5', name: 'Station E', freeBikes: 1, emptySlots: 9 },
+  { id: '6', name: 'Station F', freeBikes: 5, emptySlots: 10 },
+  { id: '7', name: 'Station G', freeBikes: 0, emptySlots: 15 },
+  { id: '8', name: 'Station H', freeBikes: 3, emptySlots: 12 },
+  { id: '9', name: 'Station I', freeBikes: 2, emptySlots: 8 },
+  { id: '10', name: 'Station J', freeBikes: 1, emptySlots: 9 },
+  { id: '11', name: 'Station K', freeBikes: 1, emptySlots: 9 },
+  { id: '12', name: 'Station L', freeBikes: 1, emptySlots: 9 },
+  { id: '13', name: 'Station M', freeBikes: 1, emptySlots: 9 },
+];
 const mockContextStateValue: StationsState = {
-  stations: mockStations as StationList,
+  stations: mockStations as Station[],
   currentPage: 1,
   sortBy: 'freeBikes',
   isAscending: true,

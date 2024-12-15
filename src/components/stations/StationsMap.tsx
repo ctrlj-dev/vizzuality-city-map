@@ -1,21 +1,18 @@
 'use client';
-
+import { Station } from '@/lib/types';
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
-import { memo, useContext, useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import { Map } from '../ui/Map';
 import { OnMarketMouseEvent } from '../ui/Map/Map';
-import { StationsStateContext } from './StationsContext';
 import { getStationsMarkers } from './stations.utils';
 
-const MemoizedMap = memo(Map);
+type StationsMapsProps = {
+  stations: Station[];
+};
 
-const StationsMap = () => {
-  const { stations } = useContext(StationsStateContext);
+const StationsMap = ({ stations }: StationsMapsProps) => {
   const popupRef = useRef<mapboxgl.Popup | null>(null);
-  const markers = useMemo(
-    () => getStationsMarkers(stations.stations),
-    [stations.stations]
-  );
+  const markers = getStationsMarkers(stations);
 
   const handleOnMouseEnter = (e: OnMarketMouseEvent) => {
     if (!e.features) {
@@ -41,7 +38,7 @@ const StationsMap = () => {
   };
 
   return (
-    <MemoizedMap
+    <Map
       id={'stations'}
       showNearmeControl={false}
       markers={markers}

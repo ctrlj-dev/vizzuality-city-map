@@ -4,7 +4,7 @@ import { useUserLocation } from '@/lib/hooks/useUserLocation';
 import { FeatureCollection } from 'geojson';
 import mapboxgl, { SourceSpecification } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { MapControlsLocation, MapControlsZoom } from './MapControls';
 import { calculateBounds, getInitialPosition } from './map.utils';
 
@@ -27,6 +27,9 @@ export type MapProps = {
   onMarkerHover?: (event: OnMarketMouseEvent) => void;
   onMarkerLeave?: (event: OnMarketMouseEvent) => void;
 };
+
+const MemoizedMapControlsZoom = memo(MapControlsZoom);
+const MemoizedMapControlsLocation = memo(MapControlsLocation);
 
 export const Map = ({
   id,
@@ -156,9 +159,9 @@ export const Map = ({
   return (
     <div className="relative h-full w-full">
       <div ref={mapRef} className="h-full w-full"></div>
-      {showZoomControl && <MapControlsZoom ref={map} />}
+      {showZoomControl && <MemoizedMapControlsZoom ref={map} />}
       {showNearmeControl && (
-        <MapControlsLocation ref={map} location={location} />
+        <MemoizedMapControlsLocation ref={map} location={location} />
       )}
     </div>
   );

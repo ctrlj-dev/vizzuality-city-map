@@ -19,8 +19,8 @@ const getVisibleCompanies = (companies: string[], maxChars: number) => {
   return { visibleCompanies, hiddenCount };
 };
 
-const getNetworksMarkers = (nerworks: Network[]): Marker[] => {
-  return nerworks.map(network => {
+const getNetworksMarkers = (networks: Network[]): Marker[] => {
+  return networks.map(network => {
     return {
       id: network.id,
       longitude: network.location.longitude,

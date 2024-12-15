@@ -1,5 +1,5 @@
 'use client';
-import { StationList } from '@/lib/types';
+import { Station } from '@/lib/types';
 import {
   createContext,
   FC,
@@ -11,14 +11,14 @@ import {
 type SortBy = 'freeBikes' | 'emptySlots' | null;
 
 export type StationsState = {
-  stations: StationList;
+  stations: Station[];
   currentPage: number;
   sortBy: SortBy;
   isAscending: boolean;
 };
 
 export type StationsAPI = {
-  handleSetStations: (Stations: StationList) => void;
+  handleSetStations: (Stations: Station[]) => void;
   handleSetPage: (page: number) => void;
   handleSort: (column: 'freeBikes' | 'emptySlots') => void;
 };
@@ -38,7 +38,7 @@ enum StationsActionType {
 }
 
 type StationsAction =
-  | { type: StationsActionType.SET_STATIONS; payload: StationList }
+  | { type: StationsActionType.SET_STATIONS; payload: Station[] }
   | { type: StationsActionType.SET_CURRENT_PAGE; payload: number }
   | {
       type: StationsActionType.SET_SORT;
@@ -74,7 +74,7 @@ const StationsReducer = (
 };
 
 type StationsWrapperProps = PropsWithChildren & {
-  initialStations: StationList;
+  initialStations: Station[];
 };
 
 export const StationsWrapper: FC<StationsWrapperProps> = ({
@@ -90,7 +90,7 @@ export const StationsWrapper: FC<StationsWrapperProps> = ({
 
   const api: StationsAPI = useMemo(() => {
     return {
-      handleSetStations(stations: StationList) {
+      handleSetStations(stations: Station[]) {
         dispatch({
           type: StationsActionType.SET_STATIONS,
           payload: stations,

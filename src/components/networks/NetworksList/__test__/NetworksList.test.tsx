@@ -2,7 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { NetworksState, NetworkStateContext } from '../../NetworksContext';
 import NetworksList from '../NetworksList';
 
-jest.mock('../NetworksListSkeleton', () => () => <div>Loading...</div>);
+jest.mock('../NetworksListSkeleton', () => {
+  const MockComponent = () => <div>Loading...</div>;
+  MockComponent.displayName = 'NetworksListSkeleton';
+  return MockComponent;
+});
 
 const mockNetworks = [
   {

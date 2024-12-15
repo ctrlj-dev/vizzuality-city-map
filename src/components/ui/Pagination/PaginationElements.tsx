@@ -11,6 +11,8 @@ export const paginationVariants = cva(
     variants: {
       variant: {
         dark: 'text-white font-semibold hover:bg-primary-50 hover:text-primary-800 rounded p-2.5 transition-colors',
+        darkActive:
+          'text-primary-800 bg-white font-semibold hover:bg-primary-50 hover:text-primary-800 rounded p-2.5 transition-colors',
         ghost:
           'font-semibold hover:bg-primary-50 rounded p-2.5 transition-colors',
         active:
@@ -29,6 +31,8 @@ export const paginationVariants = cva(
     },
   }
 );
+
+type LinkVariants = 'dark' | 'darkActive' | 'ghost' | 'active';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
   <nav
@@ -73,7 +77,16 @@ const PaginationLink = ({
   size = 'icon',
   ...props
 }: PaginationLinkProps) => {
-  const variant = theme === 'light' ? 'ghost' : 'dark';
+  let variant: LinkVariants = theme === 'light' ? 'ghost' : 'dark';
+  const isDarkActive = theme === 'dark' && isActive;
+  const isLightActive = theme === 'light' && isActive;
+
+  if (isDarkActive) {
+    variant = 'darkActive';
+  }
+  if (isLightActive) {
+    variant = 'active';
+  }
 
   return (
     <a
@@ -81,8 +94,9 @@ const PaginationLink = ({
       tabIndex={0}
       aria-current={isActive ? 'page' : undefined}
       className={cn(
+        `hover:cursor-pointer`,
         paginationVariants({
-          variant: isActive ? 'active' : variant,
+          variant,
           size,
         }),
         className

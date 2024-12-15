@@ -1,4 +1,5 @@
 import { getStations } from '@/lib/services/cityBikeApi';
+import { memo } from 'react';
 import { Sidebar } from '../ui/Sidebar';
 import { StationsWrapper } from './StationsContext';
 import StationsHeader from './StationsHeader';
@@ -9,16 +10,27 @@ type StationsViewProps = {
   id: string;
 };
 
+const MemoizedStationsHeader = memo(StationsHeader);
+
 const StationsView = async ({ id }: StationsViewProps) => {
-  const stations = await getStations(id);
+  const stationsList = await getStations(id);
+  const { stations, name, location, company } = stationsList;
+
   return (
-    <StationsWrapper initialStations={stations}>
+    <>
       <Sidebar className="p-0 bg-primary-800">
-        <StationsHeader />
-        <StationsTable />
+        <MemoizedStationsHeader
+          name={name}
+          city={location.city}
+          country={location.country}
+          company={company}
+        />
+        <StationsWrapper initialStations={stations}>
+          <StationsTable />
+        </StationsWrapper>
       </Sidebar>
-      <StationsMap />
-    </StationsWrapper>
+      <StationsMap stations={stations} />
+    </>
   );
 };
 

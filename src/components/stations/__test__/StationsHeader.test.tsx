@@ -1,21 +1,21 @@
 import { render, screen } from '@testing-library/react';
-import { StationsState, StationsStateContext } from '../StationsContext';
 import StationsHeader from '../StationsHeader';
 
 describe('StationsHeader', () => {
-  const mockContextValue = {
-    stations: {
-      name: 'Station A',
-      location: { city: 'City Name', country: 'Country Name' },
-      company: ['Company 1', 'Company 2'],
-    },
+  const mockStationDetails = {
+    name: 'Station A',
+    location: { city: 'City Name', country: 'Country Name' },
+    company: ['Company 1', 'Company 2'],
   };
 
   it('renders the station header with correct information', () => {
     render(
-      <StationsStateContext.Provider value={mockContextValue as StationsState}>
-        <StationsHeader />
-      </StationsStateContext.Provider>
+      <StationsHeader
+        name={mockStationDetails.name}
+        city={mockStationDetails.location.city}
+        company={mockStationDetails.company}
+        country={mockStationDetails.location.country}
+      />
     );
 
     // Check if the station name is rendered

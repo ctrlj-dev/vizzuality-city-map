@@ -1,4 +1,4 @@
-import { StationList } from '@/lib/types';
+import { Station } from '@/lib/types';
 import { render, screen } from '@testing-library/react';
 import { StationsState, StationsStateContext } from '../../StationsContext';
 import StationsTable from '../StationsTable';
@@ -11,7 +11,7 @@ const mockStations = [
 ];
 
 const mockContextValue: StationsState = {
-  stations: { stations: mockStations } as StationList,
+  stations: mockStations as Station[],
   currentPage: 1,
   sortBy: 'freeBikes',
   isAscending: true,

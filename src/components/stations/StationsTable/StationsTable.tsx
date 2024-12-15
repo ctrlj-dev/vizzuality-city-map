@@ -8,13 +8,8 @@ import StationsTableHeader from './StationsTableHeader';
 import StationsTablePagination from './StationsTablePagination';
 
 export const StationsTable = () => {
-  const {
-    stations: stationList,
-    currentPage,
-    sortBy,
-    isAscending,
-  } = useContext(StationsStateContext);
-  const { stations } = stationList;
+  const { stations, currentPage, sortBy, isAscending } =
+    useContext(StationsStateContext);
 
   const paginatedData = paginatedElements(
     stations,
@@ -44,19 +39,19 @@ export const StationsTable = () => {
             <tr key={station.id}>
               <td
                 tabIndex={0}
-                className="px-4 py-6 border-b border-dotted border-white"
+                className="px-4 py-6 border-b border-dotted border-opacity-50 border-white"
               >
                 {station.name}
               </td>
               <td
                 tabIndex={0}
-                className="px-4 py-6 border-b border-dotted border-white text-center font-bold"
+                className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
               >
                 {station.freeBikes}
               </td>
               <td
                 tabIndex={0}
-                className="px-4 py-6 border-b border-dotted border-white text-center font-bold"
+                className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
               >
                 {station.emptySlots}
               </td>
