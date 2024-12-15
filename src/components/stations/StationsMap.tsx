@@ -43,6 +43,7 @@ const StationsMap = () => {
   return (
     <MemoizedMap
       id={'stations'}
+      showNearmeControl={false}
       markers={markers}
       onMarkerHover={handleOnMouseEnter}
       onMarkerLeave={handleOnMouseLeave}
