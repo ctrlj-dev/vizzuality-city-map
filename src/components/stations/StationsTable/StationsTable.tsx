@@ -18,7 +18,9 @@ export const StationsTable = () => {
   );
 
   const sortedStations = [...paginatedData].sort((a, b) => {
-    if (!sortBy) return 0;
+    if (!sortBy) {
+      return 0;
+    }
     const comparison = a[sortBy] - b[sortBy];
     return isAscending ? comparison : -comparison;
   });
