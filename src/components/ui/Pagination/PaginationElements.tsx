@@ -113,7 +113,10 @@ const PaginationPrevious = ({
   theme,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) => {
-  const variant = theme === 'light' ? 'text-primary-800' : 'text-white';
+  const variant =
+    theme === 'light'
+      ? 'text-primary-800'
+      : 'text-white hover:text-primary-800';
   return (
     <PaginationLink
       aria-label="Go to previous page"
@@ -133,7 +136,10 @@ const PaginationNext = ({
   theme,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) => {
-  const variant = theme === 'light' ? 'text-primary-800' : 'text-white';
+  const variant =
+    theme === 'light'
+      ? 'text-primary-800'
+      : 'text-white hover:text-primary-800';
   return (
     <PaginationLink
       aria-label="Go to next page"
