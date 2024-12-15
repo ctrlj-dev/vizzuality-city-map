@@ -27,7 +27,6 @@ const mockStations = {
   ],
 } as StationList;
 
-name;
 describe('StationsWrapper', () => {
   it('provides initial state and API to children', () => {
     render(
