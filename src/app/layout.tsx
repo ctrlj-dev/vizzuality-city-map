@@ -38,7 +38,7 @@ export default function Layout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} overflow-y-hidden font-sans antialiased`}
+        className={`${poppins.variable} md:overflow-y-hidden font-sans antialiased`}
       >
         <main className="main-container">{children}</main>
       </body>
