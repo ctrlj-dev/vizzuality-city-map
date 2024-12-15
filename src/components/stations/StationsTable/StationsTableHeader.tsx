@@ -15,18 +15,18 @@ const StationsTableHeader = () => {
           className="w-1/3 px-4 py-2 border-b-2 border-white text-sm uppercase tracking-wide font-medium cursor-pointer"
           onClick={() => handleSort('freeBikes')}
         >
-          Free Bikes
-          <span className="inline-flex flex-col ml-2">
-            <ArrowDownUp className="w-4 h-4" />
+          <span className="inline-flex flex-row items-center">
+            Free Bikes
+            <ArrowDownUp className="ml-2 w-4 h-4" />
           </span>
         </th>
         <th
           className="w-1/3 px-4 py-2 border-b-2 border-white text-sm uppercase tracking-wide font-medium cursor-pointer"
           onClick={() => handleSort('emptySlots')}
         >
-          Empty Slots
-          <span className="inline-flex flex-col ml-2">
-            <ArrowDownUp className="w-4 h-4" />
+          <span className="inline-flex flex-row items-center justify-start">
+            Empty Slots
+            <ArrowDownUp className="ml-2 w-4 h-4" />
           </span>
         </th>
       </tr>
