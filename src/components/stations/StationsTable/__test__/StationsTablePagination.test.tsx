@@ -28,7 +28,6 @@ const mockStations = {
 
 const mockContextStateValue: StationsState = {
   stations: mockStations as StationList,
-  loading: false,
   currentPage: 1,
   sortBy: 'freeBikes',
   isAscending: true,

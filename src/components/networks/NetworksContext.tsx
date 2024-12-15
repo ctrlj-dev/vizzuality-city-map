@@ -17,14 +17,14 @@ export type NetworksFilters = {
   country?: string;
 };
 
-type NetworksState = {
+export type NetworksState = {
   networks: Network[];
   loading: boolean;
   currentPage: number;
   filters: NetworksFilters;
 };
 
-type NetworksAPI = {
+export type NetworksAPI = {
   handleSetNetworks: (networks: Network[]) => void;
   handleSetFilters: (filters: NetworksFilters) => void;
   handleSetPage: (page: number) => void;
