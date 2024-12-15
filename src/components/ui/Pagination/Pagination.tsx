@@ -42,6 +42,10 @@ const Pagination = ({
     }
   };
 
+  if (totalPages === 1) {
+    return null;
+  }
+
   return (
     <PaginationRoot className={className}>
       <PaginationContent>

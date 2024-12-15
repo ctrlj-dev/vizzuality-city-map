@@ -10,7 +10,7 @@ const StationsTableHeader = () => {
       <tr>
         <th
           tabIndex={0}
-          className="w-1/3 px-4 py-2 border-b-2 border-white uppercase tracking-wide text-sm font-medium"
+          className="w-2/4 px-4 py-2 border-b-2 border-white uppercase tracking-wide text-sm font-medium"
         >
           Station Name
         </th>
