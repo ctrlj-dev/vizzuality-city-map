@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'; // Utility function for conditional class names if you're using shadcn/ui conventions
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
