@@ -1,6 +1,7 @@
 'use client';
 
 import { useUserLocation } from '@/lib/hooks/useUserLocation';
+import { FeatureCollection } from 'geojson';
 import mapboxgl, { SourceSpecification } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
@@ -8,28 +9,48 @@ import { MapControlsLocation, MapControlsZoom } from './MapControls';
 import { calculateBounds, getInitialPosition } from './map.utils';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+export type OnMarketMouseEvent = mapboxgl.MapMouseEvent & mapboxgl.MapEvent;
 
-export type Marker = {
+export type Marker<Properties = Record<string, unknown>> = {
   id: string;
-  name?: string;
-  freeBikes?: number;
-  emptySlots?: number;
   longitude: number;
   latitude: number;
+  properties?: Properties;
 };
-
-export type OnMarketClickEvent = mapboxgl.MapMouseEvent & mapboxgl.MapEvent;
 
 export type MapProps = {
   id: string;
   markers: Marker[];
-  onMarkerClick?: (event: OnMarketClickEvent) => void;
+  onMarkerClick?: (event: OnMarketMouseEvent) => void;
+  onMarkerHover?: (event: OnMarketMouseEvent) => void;
+  onMarkerLeave?: (event: OnMarketMouseEvent) => void;
 };
 
-export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
+export const Map = ({
+  id,
+  onMarkerClick,
+  onMarkerHover,
+  onMarkerLeave,
+  markers,
+}: MapProps) => {
   const { location } = useUserLocation();
   const mapRef = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+
+  const data: FeatureCollection = {
+    type: 'FeatureCollection',
+    features: markers.map(marker => ({
+      type: 'Feature',
+      properties: {
+        id: marker.id,
+        ...(marker.properties && { ...marker.properties }),
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [marker.longitude, marker.latitude],
+      },
+    })),
+  };
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -52,22 +73,7 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
       // Add the initial source of markers
       const source: SourceSpecification = {
         type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: markers.map(marker => ({
-            type: 'Feature',
-            properties: {
-              id: marker.id,
-              ...(marker.name && { name: marker.name }),
-              ...(marker.freeBikes && { freeBikes: marker.freeBikes }),
-              ...(marker.emptySlots && { emptySlots: marker.emptySlots }),
-            },
-            geometry: {
-              type: 'Point',
-              coordinates: [marker.longitude, marker.latitude],
-            },
-          })),
-        },
+        data,
       };
 
       if (!map.current?.getSource(id)) {
@@ -88,15 +94,23 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
         });
       }
 
+      map.current?.on('mouseenter', id, () => {
+        map.current?.getCanvas().style.setProperty('cursor', 'pointer');
+      });
+      map.current?.on('mouseleave', id, () => {
+        map.current?.getCanvas().style.setProperty('cursor', '');
+      });
+
       // Handle click events on the markers
       if (onMarkerClick) {
         map.current?.on('click', id, onMarkerClick);
-        map.current?.on('mouseenter', id, () => {
-          map.current?.getCanvas().style.setProperty('cursor', 'pointer');
-        });
-        map.current?.on('mouseleave', id, () => {
-          map.current?.getCanvas().style.setProperty('cursor', '');
-        });
+      }
+      // Handle hover events on the markers
+      if (onMarkerHover) {
+        map.current?.on('mouseenter', id, onMarkerHover);
+      }
+      if (onMarkerLeave) {
+        map.current?.on('mouseleave', id, onMarkerLeave);
       }
     });
 
@@ -120,35 +134,19 @@ export const Map = ({ id, onMarkerClick, markers }: MapProps) => {
       const source = map.current.getSource(id) as mapboxgl.GeoJSONSource;
 
       if (source) {
-        source.setData({
-          type: 'FeatureCollection',
-          features: markers.map(marker => ({
-            type: 'Feature',
-            center: getInitialPosition(markers),
-            properties: {
-              id: marker.id,
-              ...(marker.name && { name: marker.name }),
-              ...(marker.freeBikes && { freeBikes: marker.freeBikes }),
-              ...(marker.emptySlots && { emptySlots: marker.emptySlots }),
-            },
-            geometry: {
-              type: 'Point',
-              coordinates: [marker.longitude, marker.latitude],
-            },
-          })),
-        });
+        source.setData(data);
       }
-    }
 
-    if (markers.length > 0 && map.current) {
-      const bounds = calculateBounds(markers);
+      if (markers.length > 0 && map.current) {
+        const bounds = calculateBounds(markers);
 
-      if (bounds) {
-        map.current.fitBounds(bounds, {
-          padding: 20,
-          essential: true,
-          maxZoom: 10,
-        });
+        if (bounds) {
+          map.current.fitBounds(bounds, {
+            padding: 20,
+            essential: true,
+            maxZoom: 10,
+          });
+        }
       }
     }
   }, [markers]);

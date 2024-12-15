@@ -1,7 +1,7 @@
 'use client';
 
 import { Map } from '@/components/ui/Map';
-import { OnMarketClickEvent } from '@/components/ui/Map/Map';
+import { OnMarketMouseEvent } from '@/components/ui/Map/Map';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { NetworkStateContext } from './NetworksContext';
@@ -9,11 +9,11 @@ import { getNetworksMarkers } from './networks.utils';
 
 const NetworksMap = () => {
   const { networks } = useContext(NetworkStateContext);
-  const markers = getNetworksMarkers(networks);
-
   const router = useRouter();
 
-  const handleMapRouting = (e: OnMarketClickEvent) => {
+  const markers = getNetworksMarkers(networks);
+
+  const handleMapRouting = (e: OnMarketMouseEvent) => {
     if (!e.features) {
       return;
     }

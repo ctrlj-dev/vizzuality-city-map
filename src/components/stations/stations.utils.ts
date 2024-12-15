@@ -7,11 +7,13 @@ const getStationsMarkers = (stations: Station[]): Marker[] => {
   return stations.map(station => {
     return {
       id: station.id,
-      name: station.name,
-      freeBikes: station.freeBikes,
-      emptySlots: station.emptySlots,
       longitude: station.longitude,
       latitude: station.latitude,
+      properties: {
+        name: station.name,
+        freeBikes: station.freeBikes,
+        emptySlots: station.emptySlots,
+      },
     };
   });
 };
