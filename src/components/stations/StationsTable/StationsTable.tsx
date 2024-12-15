@@ -30,7 +30,7 @@ export const StationsTable = () => {
 
   return (
     <div className="bg-primary-800 text-white px-10 pb-5">
-      <p className="mt-2 mb-4">
+      <p tabIndex={0} className="mt-2 mb-4">
         All
         <span className="mx-2 border px-3 py-0 border-secondary-400 text-secondary-400">
           {stations.length}
@@ -42,13 +42,22 @@ export const StationsTable = () => {
         <tbody>
           {sortedStations.map(station => (
             <tr key={station.id}>
-              <td className="px-4 py-6 border-b border-dotted border-white">
+              <td
+                tabIndex={0}
+                className="px-4 py-6 border-b border-dotted border-white"
+              >
                 {station.name}
               </td>
-              <td className="px-4 py-6 border-b border-dotted border-white text-center font-bold">
+              <td
+                tabIndex={0}
+                className="px-4 py-6 border-b border-dotted border-white text-center font-bold"
+              >
                 {station.freeBikes}
               </td>
-              <td className="px-4 py-6 border-b border-dotted border-white text-center font-bold">
+              <td
+                tabIndex={0}
+                className="px-4 py-6 border-b border-dotted border-white text-center font-bold"
+              >
                 {station.emptySlots}
               </td>
             </tr>

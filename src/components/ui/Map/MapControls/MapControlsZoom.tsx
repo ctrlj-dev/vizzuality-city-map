@@ -16,10 +16,20 @@ const MapControlsZoom = ({ ref }: MapControlsZoomProps) => {
 
   return (
     <div className="mapbox-zoom-buttons">
-      <Button aria-label="zoom In" onClick={zoomIn} variant="secondary">
+      <Button
+        tabIndex={0}
+        aria-label="zoom In"
+        onClick={zoomIn}
+        variant="secondary"
+      >
         <Plus size={32} />
       </Button>
-      <Button aria-label="zoom out" onClick={zoomOut} variant="secondary">
+      <Button
+        tabIndex={0}
+        aria-label="zoom out"
+        onClick={zoomOut}
+        variant="secondary"
+      >
         <Minus size={32} />
       </Button>
     </div>

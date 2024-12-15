@@ -113,6 +113,7 @@ const CommandItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.Item
+    tabIndex={0}
     ref={ref}
     className={
       (cn(

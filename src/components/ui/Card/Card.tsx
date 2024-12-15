@@ -6,6 +6,7 @@ const Card = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
+    tabIndex={0}
     ref={ref}
     className={cn(
       'relative block px-4 py-4 rounded-sm border-b border-primary-100 hover:bg-primary-100 transition-colors cursor-pointer group',
@@ -22,6 +23,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h2
     ref={ref}
+    tabIndex={0}
     className={cn(
       'font-bold text-xl leading-7 text-primary-800 mb-1',
       className
@@ -45,6 +47,7 @@ const CardItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
+    tabIndex={0}
     className={cn('flex items-center gap-2 mb-2;', className)}
     {...props}
   />

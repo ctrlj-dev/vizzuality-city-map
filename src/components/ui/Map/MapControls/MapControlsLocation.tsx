@@ -19,7 +19,7 @@ const MapControlsLocation = ({ ref, location }: MapControlsLocationProps) => {
 
   return (
     <div className="absolute top-8 left-8 flex flex-col space-y-2">
-      <Button size="default" onClick={centerOnUserLocation}>
+      <Button tabIndex={0} size="default" onClick={centerOnUserLocation}>
         <Locate className="mr-2" />
         Near me
       </Button>

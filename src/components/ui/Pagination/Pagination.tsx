@@ -26,16 +26,20 @@ const Pagination = ({
   onNavigateToPage,
   theme = 'light',
 }: PaginationProps) => {
-  const handlePreviousPage = () => {
-    onPreviousPage();
-  };
-
-  const handleNextPage = () => {
-    onNextPage();
-  };
-
   const handleNavigateToPage = (page: number) => {
-    onNavigateToPage(page);
+    if (page !== currentPage) {
+      onNavigateToPage(page);
+    }
+  };
+
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLAnchorElement>,
+    action: () => void
+  ) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      action();
+    }
   };
 
   return (
@@ -43,11 +47,22 @@ const Pagination = ({
       <PaginationContent>
         {currentPage > 1 && (
           <>
-            <PaginationPrevious theme={theme} onClick={handlePreviousPage} />
+            <PaginationPrevious
+              theme={theme}
+              onClick={onPreviousPage}
+              onKeyDown={event => handleKeyDown(event, onPreviousPage)}
+              tabIndex={0} // Asegura que el elemento sea accesible con el teclado
+            />
             <PaginationLink
               theme={theme}
               isActive={currentPage === currentPage - 1}
               onClick={() => handleNavigateToPage(currentPage - 1)}
+              onKeyDown={event =>
+                handleKeyDown(event, () =>
+                  handleNavigateToPage(currentPage - 1)
+                )
+              }
+              aria-disabled={currentPage === currentPage - 1} // Deshabilitar el enlace si es la página actual
             >
               {currentPage - 1}
             </PaginationLink>
@@ -58,6 +73,10 @@ const Pagination = ({
           theme={theme}
           isActive
           onClick={() => handleNavigateToPage(currentPage)}
+          onKeyDown={event =>
+            handleKeyDown(event, () => handleNavigateToPage(currentPage))
+          }
+          aria-disabled // Deshabilitar el enlace si es la página actual
         >
           {currentPage}
         </PaginationLink>
@@ -67,6 +86,10 @@ const Pagination = ({
             theme={theme}
             isActive={currentPage === currentPage + 1}
             onClick={() => handleNavigateToPage(currentPage + 1)}
+            onKeyDown={event =>
+              handleKeyDown(event, () => handleNavigateToPage(currentPage + 1))
+            }
+            aria-disabled={currentPage === currentPage + 1} // Deshabilitar el enlace si es la página actual
           >
             {currentPage + 1}
           </PaginationLink>
@@ -75,7 +98,12 @@ const Pagination = ({
         {currentPage < totalPages - 1 && <PaginationEllipsis />}
 
         {currentPage < totalPages && (
-          <PaginationNext theme={theme} onClick={handleNextPage} />
+          <PaginationNext
+            theme={theme}
+            onClick={onNextPage}
+            onKeyDown={event => handleKeyDown(event, onNextPage)}
+            tabIndex={0} // Asegura que el elemento sea accesible con el teclado
+          />
         )}
       </PaginationContent>
     </PaginationRoot>

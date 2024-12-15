@@ -9,7 +9,7 @@ const setup = (props = {}) => {
   render(
     <Pagination
       currentPage={1}
-      totalPages={5}
+      totalPages={10}
       onPreviousPage={mockOnPreviousPage}
       onNextPage={mockOnNextPage}
       onNavigateToPage={mockOnNavigateToPage}
@@ -50,9 +50,9 @@ describe('Pagination Component', () => {
 
   it('navigates to a specific page when page number is clicked', () => {
     setup({ currentPage: 2 });
-    const pageTwo = screen.getByText('2');
-    fireEvent.click(pageTwo);
-    expect(mockOnNavigateToPage).toHaveBeenCalledWith(2);
+    const pageThree = screen.getByText('3');
+    fireEvent.click(pageThree);
+    expect(mockOnNavigateToPage).toHaveBeenCalledWith(3);
   });
 
   it('does not render the previous button on the first page', () => {
@@ -63,7 +63,7 @@ describe('Pagination Component', () => {
   });
 
   it('does not render the next button on the last page', () => {
-    setup({ currentPage: 5 });
+    setup({ currentPage: 10 });
     expect(
       screen.queryByRole('link', { name: /next/i })
     ).not.toBeInTheDocument();
@@ -75,7 +75,7 @@ describe('Pagination Component', () => {
   });
 
   it('does not render ellipsis if on the last page', () => {
-    setup({ currentPage: 5 });
+    setup({ currentPage: 10 });
     expect(screen.queryByText('More pages')).not.toBeInTheDocument();
   });
 });

@@ -23,28 +23,40 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
   );
 
   return (
-    <Card tabIndex={0} className="relative card-animate">
+    <Card className="relative card-animate">
       <Link href={`/networks/${id}`} shallow>
         <CardTitle>{name}</CardTitle>
 
         <CardItem>
-          <div className="flex justify-center items-center bg-primary-50 w-6 h-6 rounded-s">
+          <div
+            tabIndex={0}
+            className="flex justify-center items-center bg-primary-50 w-6 h-6 rounded-s"
+          >
             <MapPinIcon className="w-4 h-4 text-secondary-400" />
           </div>
-          <h3 className="text-sm leading-7 text-zinc-500">
+          <h3 tabIndex={0} className="text-sm leading-7 text-zinc-500">
             {location.city}, {location.country}
           </h3>
         </CardItem>
 
         <CardItem className="mb-0">
-          <div className="flex justify-center items-center bg-primary-50 w-6 h-6 rounded-s">
+          <div
+            tabIndex={0}
+            className="flex justify-center items-center bg-primary-50 w-6 h-6 rounded-s"
+          >
             <BriefcaseIcon className="w-4 h-4 text-secondary-400" />
           </div>
-          <h4 className="text-sm leading-7 text-zinc-500 whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
+          <h4
+            tabIndex={0}
+            className="text-sm leading-7 text-zinc-500 whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]"
+          >
             {visibleCompanies}
           </h4>
           {hiddenCount > 0 && company.length > 1 && (
-            <span className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-2 py-1">
+            <span
+              tabIndex={0}
+              className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-2 py-1"
+            >
               + {hiddenCount}
             </span>
           )}

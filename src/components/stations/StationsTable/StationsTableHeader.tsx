@@ -8,10 +8,14 @@ const StationsTableHeader = () => {
   return (
     <thead>
       <tr>
-        <th className="w-1/3 px-4 py-2 border-b-2 border-white uppercase tracking-wide text-sm font-medium">
+        <th
+          tabIndex={0}
+          className="w-1/3 px-4 py-2 border-b-2 border-white uppercase tracking-wide text-sm font-medium"
+        >
           Station Name
         </th>
         <th
+          tabIndex={0}
           className="w-1/3 px-4 py-2 border-b-2 border-white text-sm uppercase tracking-wide font-medium cursor-pointer"
           onClick={() => handleSort('freeBikes')}
         >
@@ -21,6 +25,7 @@ const StationsTableHeader = () => {
           </span>
         </th>
         <th
+          tabIndex={0}
           className="w-1/3 px-4 py-2 border-b-2 border-white text-sm uppercase tracking-wide font-medium cursor-pointer"
           onClick={() => handleSort('emptySlots')}
         >
