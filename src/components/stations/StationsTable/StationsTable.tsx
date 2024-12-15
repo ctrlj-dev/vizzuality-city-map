@@ -34,7 +34,7 @@ export const StationsTable = () => {
         </span>
         stations
       </p>
-      <div className="overflow-x-auto min-h-[120vh] lg:min-h-[85vh]">
+      <div className="overflow-x-auto">
         <table className="min-w-full text-left border-collapse">
           <StationsTableHeader />
           <tbody>

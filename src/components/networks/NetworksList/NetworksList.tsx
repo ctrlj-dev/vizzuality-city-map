@@ -27,18 +27,16 @@ const NetworksList = () => {
 
   return (
     <div className="my-4">
-      <div className="min-h-[110vh]  lg:min-h-[80vh]">
-        {paginatedData.length > 0 &&
-          paginatedData.map(network => (
-            <NetworksListItem
-              key={network.id}
-              id={network.id}
-              name={network.name}
-              company={network.company}
-              location={network.location}
-            />
-          ))}
-      </div>
+      {paginatedData.length > 0 &&
+        paginatedData.map(network => (
+          <NetworksListItem
+            key={network.id}
+            id={network.id}
+            name={network.name}
+            company={network.company}
+            location={network.location}
+          />
+        ))}
       <NetworksListPagination />
     </div>
   );

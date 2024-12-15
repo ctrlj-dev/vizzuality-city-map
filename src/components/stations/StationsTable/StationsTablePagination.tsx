@@ -24,7 +24,7 @@ const StationsTablePagination = () => {
   return (
     <Pagination
       theme="dark"
-      className="mt-6"
+      className="mt-6 mb-16 md:mb-0"
       totalPages={totalPages}
       currentPage={currentPage}
       onPreviousPage={handlePreviousPage}

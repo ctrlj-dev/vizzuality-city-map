@@ -9,7 +9,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   return (
     <aside
       className={cn(
-        'relative flex flex-col p-4 lg:p-10 bg-white border-r border-gray-200 md:overflow-y-auto md:h-[100vh] animate-slide-in',
+        'relative flex flex-col p-4 lg:p-10 bg-white border-r border-gray-200 md:overflow-y-auto h-[100vh] animate-slide-in',
         className
       )}
       {...props}
