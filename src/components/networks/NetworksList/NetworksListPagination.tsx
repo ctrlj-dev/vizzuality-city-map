@@ -1,3 +1,5 @@
+'use client';
+
 import { Pagination } from '@/components/ui/Pagination';
 import { useContext } from 'react';
 import { NetworkAPIContext, NetworkStateContext } from '../NetworksContext';

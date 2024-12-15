@@ -10,8 +10,8 @@ type StationsViewProps = {
 };
 
 const StationsView = async ({ id }: StationsViewProps) => {
-  const stationsList = await getStations(id);
-  const { stations, name, location, company } = stationsList;
+  const stationDetails = await getStations(id);
+  const { stations, name, location, company } = stationDetails;
 
   return (
     <>

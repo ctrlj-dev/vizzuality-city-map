@@ -1,4 +1,4 @@
-import { StationList } from '@/lib/types';
+import { StationDetails } from '@/lib/types';
 import { render, screen } from '@testing-library/react';
 import {
   StationsAPIContext,
@@ -25,7 +25,7 @@ const mockStations = {
       longitude: 0,
     },
   ],
-} as StationList;
+} as StationDetails;
 
 describe('StationsWrapper', () => {
   it('provides initial state and API to children', () => {

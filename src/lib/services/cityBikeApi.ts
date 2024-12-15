@@ -1,5 +1,5 @@
 import { config } from '../config';
-import { StationList, StationsListResponse } from '../types';
+import { StationDetails, StationsDetailsResponse } from '../types';
 import { Network, NetWorksResponse } from '../types/networks';
 import {
   networksResponseToNetworks,
@@ -32,7 +32,7 @@ async function getNetworks(): Promise<Network[]> {
   }
 }
 
-async function getStations(id: string): Promise<StationList> {
+async function getStations(id: string): Promise<StationDetails> {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`);
 
@@ -42,7 +42,7 @@ async function getStations(id: string): Promise<StationList> {
       );
     }
 
-    const jsonData: StationsListResponse = await response.json();
+    const jsonData: StationsDetailsResponse = await response.json();
     return stationsResponseToStations(jsonData);
   } catch (err) {
     console.error('Error fetching stations:', err);

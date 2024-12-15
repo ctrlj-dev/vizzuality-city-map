@@ -2,9 +2,9 @@ import {
   Network,
   NetWorksResponse,
   Station,
-  StationList,
+  StationDetails,
   StationResponse,
-  StationsListResponse,
+  StationsDetailsResponse,
 } from '@/lib/types';
 
 const networksResponseToNetworks = (
@@ -34,7 +34,7 @@ const stationNotFound = {
   stations: [],
 };
 
-const stationsListReponseToStationsList = (
+const StationsDetailsReponseToStationsDetails = (
   response: StationResponse[]
 ): Station[] => {
   if (!response) {
@@ -53,8 +53,8 @@ const stationsListReponseToStationsList = (
 };
 
 const stationsResponseToStations = (
-  response: StationsListResponse
-): StationList => {
+  response: StationsDetailsResponse
+): StationDetails => {
   if (!response) {
     return stationNotFound;
   }
@@ -66,7 +66,7 @@ const stationsResponseToStations = (
     company: company,
     location: location,
     name: name,
-    stations: stationsListReponseToStationsList(stations),
+    stations: StationsDetailsReponseToStationsDetails(stations),
   };
 };
 
