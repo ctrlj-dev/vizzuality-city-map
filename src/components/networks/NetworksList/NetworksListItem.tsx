@@ -16,7 +16,7 @@ interface Props {
 }
 
 const NetworksListItem = ({ id, name, company, location }: Props) => {
-  const maxVisibleChars = 30;
+  const maxVisibleChars = 20;
   const { visibleCompanies, hiddenCount } = getVisibleCompanies(
     company,
     maxVisibleChars
@@ -55,7 +55,7 @@ const NetworksListItem = ({ id, name, company, location }: Props) => {
           {hiddenCount > 0 && company.length > 1 && (
             <span
               tabIndex={0}
-              className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-2 py-1"
+              className="border border-secondary-400 text-secondary-400 text-sm rounded-[2px] px-2 py-0"
             >
               + {hiddenCount}
             </span>

@@ -29,7 +29,7 @@ type StationDetailResponse = {
   stations: StationResponse[];
 };
 
-export type StationsListResponse = {
+export type StationsDetailsResponse = {
   network: StationDetailResponse;
 };
 
@@ -42,7 +42,7 @@ export type Station = {
   name: string;
 };
 
-export type StationList = {
+export type StationDetails = {
   id: string;
   company: string[];
   location: Location;

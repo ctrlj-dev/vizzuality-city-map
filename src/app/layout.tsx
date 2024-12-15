@@ -11,7 +11,23 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'Cycle Map',
-  description: 'A Worldwide bike networks',
+  description:
+    'Discover bike networks around the world. Plan your routes and explore cycling paths with ease.',
+  openGraph: {
+    title: 'Cycle Map - Worldwide Bike Networks',
+    description:
+      'Explore bike networks and cycling routes worldwide. Your ultimate guide for cycling enthusiasts.',
+    url: '/',
+    siteName: 'Cycle Map',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cycle Map - Worldwide Bike Networks',
+    description:
+      'Discover cycling paths and bike networks worldwide. Plan your cycling routes with Cycle Map.',
+    site: '@cyclemap',
+  },
 };
 
 export default function Layout({

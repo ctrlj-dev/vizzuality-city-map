@@ -42,6 +42,10 @@ const Pagination = ({
     }
   };
 
+  if (totalPages === 1) {
+    return null;
+  }
+
   return (
     <PaginationRoot className={className}>
       <PaginationContent>
@@ -51,7 +55,7 @@ const Pagination = ({
               theme={theme}
               onClick={onPreviousPage}
               onKeyDown={event => handleKeyDown(event, onPreviousPage)}
-              tabIndex={0} // Asegura que el elemento sea accesible con el teclado
+              tabIndex={0}
             />
             <PaginationLink
               theme={theme}
@@ -62,7 +66,7 @@ const Pagination = ({
                   handleNavigateToPage(currentPage - 1)
                 )
               }
-              aria-disabled={currentPage === currentPage - 1} // Deshabilitar el enlace si es la página actual
+              aria-disabled={currentPage === currentPage - 1}
             >
               {currentPage - 1}
             </PaginationLink>
@@ -76,7 +80,7 @@ const Pagination = ({
           onKeyDown={event =>
             handleKeyDown(event, () => handleNavigateToPage(currentPage))
           }
-          aria-disabled // Deshabilitar el enlace si es la página actual
+          aria-disabled
         >
           {currentPage}
         </PaginationLink>
@@ -89,7 +93,7 @@ const Pagination = ({
             onKeyDown={event =>
               handleKeyDown(event, () => handleNavigateToPage(currentPage + 1))
             }
-            aria-disabled={currentPage === currentPage + 1} // Deshabilitar el enlace si es la página actual
+            aria-disabled={currentPage === currentPage + 1}
           >
             {currentPage + 1}
           </PaginationLink>
@@ -102,7 +106,7 @@ const Pagination = ({
             theme={theme}
             onClick={onNextPage}
             onKeyDown={event => handleKeyDown(event, onNextPage)}
-            tabIndex={0} // Asegura que el elemento sea accesible con el teclado
+            tabIndex={0}
           />
         )}
       </PaginationContent>

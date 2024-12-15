@@ -1,7 +1,7 @@
 import { Station } from '@/lib/types';
 import { Marker } from '../ui/Map/Map';
 
-const STATIONS_PER_PAGE = 12;
+const STATIONS_PER_PAGE = 10;
 
 const getStationsMarkers = (stations: Station[]): Marker[] => {
   return stations.map(station => {

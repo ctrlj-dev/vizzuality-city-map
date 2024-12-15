@@ -18,7 +18,9 @@ export const StationsTable = () => {
   );
 
   const sortedStations = [...paginatedData].sort((a, b) => {
-    if (!sortBy) return 0;
+    if (!sortBy) {
+      return 0;
+    }
     const comparison = a[sortBy] - b[sortBy];
     return isAscending ? comparison : -comparison;
   });
@@ -32,7 +34,7 @@ export const StationsTable = () => {
         </span>
         stations
       </p>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto min-h-[120vh] lg:min-h-[85vh]">
         <table className="min-w-full text-left border-collapse">
           <StationsTableHeader />
           <tbody>
@@ -40,19 +42,19 @@ export const StationsTable = () => {
               <tr key={station.id}>
                 <td
                   tabIndex={0}
-                  className="px-4 py-6 border-b border-dotted border-opacity-50 border-white"
+                  className="px-4 py-4 border-b border-dotted border-opacity-50 border-white"
                 >
                   {station.name}
                 </td>
                 <td
                   tabIndex={0}
-                  className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
+                  className="px-4 py-4 border-b border-dotted border-opacity-50 border-white text-center font-semibold"
                 >
                   {station.freeBikes}
                 </td>
                 <td
                   tabIndex={0}
-                  className="px-4 py-6 border-b border-dotted border-opacity-50 border-white text-center font-bold"
+                  className="px-4 py4 border-b border-dotted border-opacity-50 border-white text-center font-semibold"
                 >
                   {station.emptySlots}
                 </td>

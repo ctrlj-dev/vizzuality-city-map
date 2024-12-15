@@ -10,11 +10,11 @@ type StationsViewProps = {
 };
 
 const StationsView = async ({ id }: StationsViewProps) => {
-  const stationsList = await getStations(id);
-  const { stations, name, location, company } = stationsList;
+  const stationDetails = await getStations(id);
+  const { stations, name, location, company } = stationDetails;
 
   return (
-    <>
+    <StationsWrapper initialStations={stations}>
       <Sidebar className="p-0 lg:p-0 bg-primary-800">
         <StationsHeader
           name={name}
@@ -22,12 +22,10 @@ const StationsView = async ({ id }: StationsViewProps) => {
           country={location.country}
           company={company}
         />
-        <StationsWrapper initialStations={stations}>
-          <StationsTable />
-        </StationsWrapper>
+        <StationsTable />
       </Sidebar>
-      <StationsMap stations={stations} />
-    </>
+      <StationsMap />
+    </StationsWrapper>
   );
 };
 

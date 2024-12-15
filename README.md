@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 15 Application
+
+This is a Next.js 15 application utilizing the app directory structure. It features static and dynamic pages, organized components, reusable hooks, and more.
 
 ## Getting Started
 
-First, run the development server:
+To run the project, use the following commands:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # Start the development server with Turbopack
+npm run build   # Build the application for production
+npm run start   # Start the production server
+npm run lint    # Lint the codebase
+npm run test    # Run tests using Jest
+npm run prepare  # Prepare Husky hooks
+npm run format   # Format the code using Prettier
+npm run lints    # Run ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Application Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📄 Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+We use the app directory of Next.js, which includes:
 
-## Learn More
+- **Static Page**: The home page.
+- **Dynamic Page**: A detail view of each station, accessible via URL parameters.
 
-To learn more about Next.js, take a look at the following resources:
+## 🧩 Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Components are organized into two main folders:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### `components`
 
-## Deploy on Vercel
+- Contains components organized by functionality (views).
+- Includes the main views for networks and stations, exporting the respective views used in their pages.
+- Organized with subfolders and utility files specific to each view.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `ui`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Contains base components that are reusable throughout the application and should be extended when necessary.
+
+## 📦 Lib
+
+### `config`
+
+- Contains the base URL for the API. This folder can also be used for additional configurations related to build, server, or development.
+
+### `data`
+
+- Contains static data that will be used in the application.
+
+## 🔗 Hooks
+
+- Contains reusable hooks that are not specific to a single view, promoting code reuse.
+
+## 🌐 Services
+
+- Contains API calls and data mappers. Leveraging Next.js's server-side capabilities allows us to map data on the server before it reaches the client, extracting only the necessary information.
+
+## 🏷️ Types
+
+- Defines type annotations for data received from the server and what is displayed on the frontend.
+
+## 🛠️ Utils
+
+- Contains various utility functions that can be used throughout the application.
+
+## ✅ Tests
+
+- Functionality and logic have been tested. UI components without variations in logic have not been tested, as they are considered to be pre-tested by their respective libraries. Coverage is not 100%.
+
+## ⚙️ State Management
+
+- Both views are structured using contexts to maintain a single source of truth and avoid prop drilling.
+
+## 🗺️ Mapbox Token
+
+- The application uses the `NEXT_PUBLIC_MAPBOX_TOKEN` environment variable to set the public Mapbox token. For more information on how to set up and use Mapbox, refer to the [Mapbox documentation](https://docs.mapbox.com/).

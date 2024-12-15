@@ -2,7 +2,7 @@ import { Country, Network } from '@/lib/types/networks';
 import { Option } from '@/lib/utils';
 import { Marker } from '../ui/Map/Map';
 
-const NETWORKS_PER_PAGE = 5;
+const NETWORKS_PER_PAGE = 8;
 
 const getVisibleCompanies = (companies: string[], maxChars: number) => {
   let visibleCompanies = companies[0];

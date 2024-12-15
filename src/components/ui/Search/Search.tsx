@@ -7,7 +7,7 @@ import { Input } from '../Input';
 
 interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
-  onClear?: () => void; // Función para limpiar el contenido
+  onClear?: () => void;
 }
 
 const Search = ({
